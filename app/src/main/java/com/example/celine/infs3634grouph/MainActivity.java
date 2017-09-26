@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int MAX_CAT4 = 40;
     private static final int MAX_CAT5 = 50;
 
+    // TODO: 26/09/2017 declare widget fields
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
         // TODO: 25/09/2017 add data into strings.xml(question content + category list)
         List<Question> questions = new ArrayList<>();
         String[] str = getResources().getStringArray(R.array.questions);
-        for(int i = 0; i < MAX_QUESTION; i++){
+        /*for(int i = 0; i < MAX_QUESTION; i++){
             Question q = new Question();
             if(i < MAX_CAT1){
-                q = new Question(str[i], R.string.category_01, 1);
+                q = new Question(str[i], R.string.category_01, 1, );
             }else if(i<MAX_CAT2){
                q = new Question(str[i], R.string.category_02, 1);
             }else if(i<MAX_CAT3){
@@ -50,10 +52,14 @@ public class MainActivity extends AppCompatActivity {
                 q = new Question(str[i], R.string.category_05, 1);
             }
             questions.add(q);
-        }
+        }*/
         db.preloadQuestions(questions);
         Log.v("SETTING DATABASE", "Data loading completed");
 
 
+        // TODO: 26/09/2017 bind widgets
+
+        // TODO: 26/09/2017 set btn onclick(start button)
+        //onclick: start quiz activity, send data of category
     }
 }

@@ -9,24 +9,31 @@ public class Question {
     private String content;
     private int difficulty;
     private int category;
+    private String[] answerOptions;
+    private int trueAnswer;
 
     //empty constructor
     public Question() {
     }
 
     //for preloading
-    public Question(String content, int difficulty, int category) {
+    public Question(String content, int difficulty, int category, String[] answerOptions, int trueAnswer) {
         this.content = content;
         this.difficulty = difficulty;
         this.category = category;
+        this.answerOptions = answerOptions;
+        this.trueAnswer = trueAnswer;
     }
 
     //for retrieving
-    public Question(int questionID, String content, int category, int difficulty) {
+    public Question(int questionID, String content, int difficulty, int category, String[] answerOptions,
+                    int trueAnswer) {
         this.questionID = questionID;
         this.content = content;
         this.difficulty = difficulty;
         this.category = category;
+        this.answerOptions = answerOptions;
+        this.trueAnswer = trueAnswer;
     }
 
     public int getQuestionID() {
@@ -59,5 +66,21 @@ public class Question {
 
     public void setCategory(int category) {
         this.category = category;
+    }
+
+    public String[] getAnswerOptions() {
+        return answerOptions;
+    }
+
+    public void setAnswerOptions(String[] answerOptions) {
+        this.answerOptions = answerOptions;
+    }
+
+    public int getTrueAnswer() {
+        return trueAnswer;
+    }
+
+    public void setTrueAnswer(int trueAnswer) {
+        this.trueAnswer = trueAnswer;
     }
 }
