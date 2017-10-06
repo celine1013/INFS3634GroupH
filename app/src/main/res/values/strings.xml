@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">INFS3634GroupH</string>
+
+    <string name="category_01"></string>
+    <string name="category_02"></string>
+    <string name="category_03"></string>
+    <string name="category_04"></string>
+    <string name="category_05"></string>
+    <string name="category_06"></string>
+
+    <string-array name="questions">
+        <item></item>
+    </string-array>
 </resources>
