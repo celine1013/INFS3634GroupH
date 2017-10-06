@@ -1,12 +1,18 @@
 <resources>
-    <string name="app_name">INFS3634GroupH</string>
+    <string name="app_name">Quizlet</string>
 
-    <string name="category_01"></string>
-    <string name="category_02"></string>
-    <string name="category_03"></string>
-    <string name="category_04"></string>
-    <string name="category_05"></string>
-    <string name="category_06"></string>
+    <string name="category_01">General</string>
+    <string name="category_02">Fundamentals</string>
+    <string name="category_03">Google</string>
+    <string name="category_04">Activities</string>
+    <string name="category_05">Fragment</string>
+    <string name="category_06">Intent</string>
+
+
+    <string name="tryAgain">Try Again</string>
+    <string name="tryAnotherCategory">Try Another Category</string>
+
+    <string name="showResult">Result</string>
 
     <string-array name="questions">
         <item></item>
