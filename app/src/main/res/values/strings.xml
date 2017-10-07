@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Quizlet</string>
 
+
+    <string name="category_random">Random</string>
     <string name="category_01">General</string>
     <string name="category_02">Fundamentals</string>
     <string name="category_03">Google</string>
@@ -10,7 +12,7 @@
 
 
     <string name="tryAgain">Try Again</string>
-    <string name="tryAnotherCategory">Try Another Category</string>
+    <string name="finish">Finish</string>
 
     <string name="showResult">Result</string>
 

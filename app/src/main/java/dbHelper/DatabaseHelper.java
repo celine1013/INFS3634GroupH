@@ -33,11 +33,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String QUESTION_CONTENT = "question_content";
     private static final String QUESTION_CATEGORY = "question_category";
     private static final String QUESTION_DIFFICULTY = "question_difficulty";
-
+    private static final String QUESTION_ANSWER_OPTIONS_1 = "question_answer_options_1";
+/*
     // Table Creation Statement
     private static final String CREATE_TABLE_QUESTION = "CREATE TABLE IF NOT EXISTS "
             + TABLE_QUESTION + "(" + KEY_QUESTION_ID + " INTEGER PRIMARY KEY," + QUESTION_CONTENT
-            + " TEXT," + QUESTION_CATEGORY + " INTEGER" + QUESTION_DIFFICULTY + " INTEGER"+")";
+            + " TEXT," + QUESTION_CATEGORY + " INTEGER" + QUESTION_DIFFICULTY + " INTEGER"
+            + QUESTION_ANSWER_OPTIONS + " INTEGER"+")";
 
     //Constructor
 
@@ -165,7 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         c.close();
         db.close();
         return questions;
-    }
+    }*/
 
     /*not yet needed*/
     //update

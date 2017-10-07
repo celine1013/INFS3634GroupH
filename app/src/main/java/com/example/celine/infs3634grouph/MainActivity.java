@@ -1,8 +1,13 @@
 package com.example.celine.infs3634grouph;
 
+import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +15,7 @@ import java.util.List;
 import dbHelper.DatabaseHelper;
 import model.Question;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     DatabaseHelper db;
     private static final int MAX_QUESTION = 50;
@@ -20,8 +25,23 @@ public class MainActivity extends AppCompatActivity {
     private static final int MAX_CAT4 = 40;
     private static final int MAX_CAT5 = 50;
 
-    // TODO: 26/09/2017 declare widget fields
 
+    //declare integer used in building intents
+    public static final int CATEGORY_RANDOM = R.string.category_random;
+    public static final int CATEGORY_01 = R.string.category_01;
+    public static final int CATEGORY_02 = R.string.category_02;
+    // TODO: 7/10/2017 complete below:
+   /* public static final int CATEGORY_ = 3;
+    public static final int CATEGORY_ = 4;
+    public static final int CATEGORY_ = 5;
+    public static final int CATEGORY_ = 6;*/
+
+    // TODO: 7/10/2017 declare all widgets
+    private Button btn_quickStart;
+    private ImageButton ib_cate01;
+
+
+    public static final String TAG_CATEGORY = "category";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
         Log.d("SETTING DATABASE", "Database rebuilt");
 
         //import sample data
-        // TODO: 25/09/2017 add data into strings.xml(question content + category list)
+        // TODO: 25/09/2017 add data into database
         List<Question> questions = new ArrayList<>();
-        String[] str = getResources().getStringArray(R.array.questions);
-        /*for(int i = 0; i < MAX_QUESTION; i++){
+        /*String[] str = getResources().getStringArray(R.array.questions);
+        for(int i = 0; i < MAX_QUESTION; i++){
             Question q = new Question();
             if(i < MAX_CAT1){
                 q = new Question(str[i], R.string.category_01, 1, );
@@ -56,10 +76,41 @@ public class MainActivity extends AppCompatActivity {
         db.preloadQuestions(questions);
         Log.v("SETTING DATABASE", "Data loading completed");
 
+        // TODO: 7/10/2017 complete binding
+        btn_quickStart = (Button)findViewById(R.id.quickStartBtn);
+        ib_cate01 = (ImageButton)findViewById(R.id.category_1);
 
-        // TODO: 26/09/2017 bind widgets
+        // TODO: 7/10/2017 complete setting onclickListener
+        btn_quickStart.setOnClickListener(this);
+        ib_cate01.setOnClickListener(this);
 
-        // TODO: 26/09/2017 set btn onclick(start button)
-        //onclick: start quiz activity, send data of category
+    }
+    // TODO: 7/10/2017 complete onclick
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(MainActivity.this, QuizActivity.class);
+        switch (view.getId()) {
+
+            //send info of diff categories to quiz activities;
+            case R.id.category_1:
+                intent.putExtra(TAG_CATEGORY, CATEGORY_01);
+                break;
+            case R.id.category_2:
+                break;
+            case R.id.category_3:
+                break;
+            case R.id.category_4:
+                break;
+            case R.id.category_5:
+                break;
+            case R.id.category_6:
+                break;
+            case R.id.quickStartBtn:
+                intent.putExtra(TAG_CATEGORY, CATEGORY_RANDOM);
+                break;
+            default:
+                startActivity(intent);
+        }
+
     }
 }

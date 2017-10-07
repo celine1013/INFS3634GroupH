@@ -17,32 +17,32 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/imageBtn1"
+                android:id="@+id/category_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <ImageButton
-                android:id="@+id/imageBtn2"
+                android:id="@+id/category_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <ImageButton
-                android:id="@+id/imageBtn3"
+                android:id="@+id/category_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <ImageButton
-                android:id="@+id/imageBtn4"
+                android:id="@+id/category_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <ImageButton
-                android:id="@+id/imageBtn5"
+                android:id="@+id/category_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <ImageButton
-                android:id="@+id/imageBtn6"
+                android:id="@+id/category_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
