@@ -14,37 +14,62 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="10dp"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/imageBtn1"
+            <Button
+                android:id="@+id/btnGeneral"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="80dp"
+                android:text="@string/category_01"
+                android:textSize="30dp"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorRed" />
 
-            <ImageButton
-                android:id="@+id/imageBtn2"
+            <Button
+                android:id="@+id/btnFundamentals"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="80dp"
+                android:background="@color/colorOrange"
+                android:text="@string/category_02"
+                android:textColor="@color/colorWhite"
+                android:textSize="30dp" />
 
-            <ImageButton
-                android:id="@+id/imageBtn3"
+            <Button
+                android:id="@+id/btnGoogle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="80dp"
+                android:text="@string/category_03"
+                android:textSize="30dp"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorYellow" />
 
-            <ImageButton
-                android:id="@+id/imageBtn4"
+            <Button
+                android:id="@+id/btnActivity"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="80dp"
+                android:text="@string/category_04"
+                android:textSize="30dp"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorGreen" />
 
-            <ImageButton
-                android:id="@+id/imageBtn5"
+            <Button
+                android:id="@+id/btnFragments"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="80dp"
+                android:text="@string/category_05"
+                android:textSize="30dp"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorBlueness" />
 
-            <ImageButton
-                android:id="@+id/imageBtn6"
+            <Button
+                android:id="@+id/btnIntent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="80dp"
+                android:text="@string/category_06"
+                android:textSize="30dp"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorBlue" />
 
         </LinearLayout>
 
@@ -54,9 +79,12 @@
         android:id="@+id/quickStartBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quick Start"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:textColor="@color/colorWhite"
+        android:text="Quick Start"
+        android:textSize="30dp" />
 
 
 </RelativeLayout>

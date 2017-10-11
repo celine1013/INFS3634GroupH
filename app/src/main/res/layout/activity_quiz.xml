@@ -8,6 +8,7 @@
     android:gravity="center"
     android:padding="10dp"
     tools:context="com.example.celine.infs3634grouph.QuizActivity">
+    
 
     <TextView
         android:id="@+id/textViewCategory"
