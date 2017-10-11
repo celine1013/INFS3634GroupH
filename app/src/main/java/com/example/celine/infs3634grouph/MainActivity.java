@@ -25,33 +25,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int MAX_CAT4 = 40;
     private static final int MAX_CAT5 = 50;
 
-
     //declare integer used in building intents
     public static final int CATEGORY_RANDOM = R.string.category_random;
     public static final int CATEGORY_01 = R.string.category_01;
     public static final int CATEGORY_02 = R.string.category_02;
     // TODO: 7/10/2017 complete below:
-   /* public static final int CATEGORY_ = 3;
-    public static final int CATEGORY_ = 4;
-    public static final int CATEGORY_ = 5;
-    public static final int CATEGORY_ = 6;*/
+    public static final int CATEGORY_03 = R.string.category_03;
+    public static final int CATEGORY_04 = R.string.category_04;
+    public static final int CATEGORY_05 = R.string.category_05;
+    public static final int CATEGORY_06 = R.string.category_06;
+    //public static final int CATEGORY_07 = R.string.category_07;
 
     // TODO: 7/10/2017 declare all widgets
     private Button btn_quickStart;
-    private ImageButton ib_cate01;
-
+    private Button btn_general;
+    private Button btn_fundamentals;
+    private Button btn_google;
+    private Button btn_activities;
+    private Button btn_fragments;
+    private Button btn_intent;
+    //private Button btn_database;
 
     public static final String TAG_CATEGORY = "category";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //set up database
-        db = new DatabaseHelper(getApplicationContext());
+       // db = new DatabaseHelper(getApplicationContext());
 
         //for testing convenience: will clean up all data and re-load when restart the app
-        db.cleanDatabase();
+        //db.cleanDatabase();
         Log.d("SETTING DATABASE", "Database rebuilt");
 
         //import sample data
@@ -73,16 +79,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             questions.add(q);
         }*/
-        db.preloadQuestions(questions);
+        //db.preloadQuestions(questions);
         Log.v("SETTING DATABASE", "Data loading completed");
 
         // TODO: 7/10/2017 complete binding
         btn_quickStart = (Button)findViewById(R.id.quickStartBtn);
-        ib_cate01 = (ImageButton)findViewById(R.id.category_1);
+        btn_general = (Button)findViewById(R.id.btnGeneral);
+        btn_fundamentals = (Button)findViewById(R.id.btnFundamentals);
+        btn_fragments = (Button)findViewById(R.id.btnFragments);
+        btn_activities = (Button)findViewById(R.id.btnActivity);
+        btn_google = (Button)findViewById(R.id.btnGoogle);
+        btn_intent = (Button)findViewById(R.id.btnIntent);
+        //btn_database = (Button)findViewById(R.id.btnDatabase);
 
         // TODO: 7/10/2017 complete setting onclickListener
         btn_quickStart.setOnClickListener(this);
-        ib_cate01.setOnClickListener(this);
+        btn_general.setOnClickListener(this);
+        btn_fundamentals.setOnClickListener(this);
+        btn_google.setOnClickListener(this);
+        btn_activities.setOnClickListener(this);
+        btn_fragments.setOnClickListener(this);
+        btn_intent.setOnClickListener(this);
+        //btn_batabase.setOnClickListener(this);
 
     }
     // TODO: 7/10/2017 complete onclick
@@ -92,25 +110,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
 
             //send info of diff categories to quiz activities;
-            case R.id.category_1:
+            case R.id.btnGeneral:
                 intent.putExtra(TAG_CATEGORY, CATEGORY_01);
                 break;
-            case R.id.category_2:
+            case R.id.btnFundamentals:
+                intent.putExtra(TAG_CATEGORY,CATEGORY_02);
                 break;
-            case R.id.category_3:
+            case R.id.btnGoogle:
+                intent.putExtra(TAG_CATEGORY,CATEGORY_03);
                 break;
-            case R.id.category_4:
+            case R.id.btnActivity:
+                intent.putExtra(TAG_CATEGORY,CATEGORY_04);
                 break;
-            case R.id.category_5:
+            case R.id.btnFragments:
+                intent.putExtra(TAG_CATEGORY,CATEGORY_05);
                 break;
-            case R.id.category_6:
+            case R.id.btnIntent:
+                intent.putExtra(TAG_CATEGORY,CATEGORY_06);
                 break;
+            //case R.id.btnDatabase:
+            //    intent.putExtra(TAG_CATEGORY,CATEGORY_07);
+            //    break;
             case R.id.quickStartBtn:
                 intent.putExtra(TAG_CATEGORY, CATEGORY_RANDOM);
                 break;
-            default:
-                startActivity(intent);
         }
-
+        startActivity(intent);
     }
 }
