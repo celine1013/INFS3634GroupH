@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Currency;
 import java.util.List;
 import dbHelper.DatabaseHelper;
 import model.Question;
@@ -62,13 +64,14 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         List<Question> questions ;//= db.getQuestionsByCategory(category);
         // TODO: 26/09/2017 perform quiz activity
-        Question q = new Question();
+        Question question = new Question();
         // show category
         show_category.setText(getResources().getString(category));
         // show question number
-        // show_questionNumber.setText();
+        // try to use the number 1-10
+        show_questionNumber.setText(question.getQuestionID());
         // show question
-        show_question.setText(q.getContent());
+        show_question.setText(question.getContent());
         // show answer options
 
         // verify if the user has chose the correct answer
