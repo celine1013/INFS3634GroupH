@@ -8,7 +8,7 @@
     android:gravity="center"
     android:padding="10dp"
     tools:context="com.example.celine.infs3634grouph.QuizActivity">
-    
+
 
     <TextView
         android:id="@+id/textViewCategory"
@@ -44,8 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlack"
-        android:paddingTop="80dp"
-        android:paddingBottom="80dp"/>
+        android:paddingTop="100dp"
+        android:paddingBottom="100dp"/>
 
     <Button
         android:id="@+id/btnAnswerA"
@@ -76,10 +76,11 @@
         android:backgroundTint="@color/colorGreen"/>
 
 
-
-    <TextView
-        android:id="@+id/showAnswer"
-        android:padding="50dp"
+    <Button
+        android:id="@+id/nextQuestion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorBlue"
+        android:padding="20dp"
+        android:textColor="@color/colorBlack" />
 </LinearLayout>
