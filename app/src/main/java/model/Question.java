@@ -18,18 +18,7 @@ public class Question {
     public Question() {
     }
 
-    //for preloading
-    public Question(String content, int difficulty, int category, String[] answerOptions, int trueAnswer) {
-        this.content = content;
-        this.difficulty = difficulty;
-        this.category = category;
-        this.answerOptions = answerOptions;
-        this.trueAnswer = trueAnswer;
-    }
-
-    //for retrieving
-    public Question(int questionID, String content, int difficulty, int category, String[] answerOptions,
-                    int trueAnswer) {
+    public Question(int questionID, String content, int difficulty, int category, String[] answerOptions, int trueAnswer) {
         this.questionID = questionID;
         this.content = content;
         this.difficulty = difficulty;
