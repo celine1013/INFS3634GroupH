@@ -34,12 +34,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String QUESTION_CATEGORY = "question_category";
     private static final String QUESTION_DIFFICULTY = "question_difficulty";
     private static final String QUESTION_ANSWER_OPTIONS_1 = "question_answer_options_1";
-/*
+    private static final String QUESTION_ANSWER_OPTIONS_2 = "question_answer_options_2";
+    private static final String QUESTION_ANSWER_OPTIONS_3 = "question_answer_options_3";
+    private static final String QUESTION_ANSWER_OPTIONS_4 = "question_answer_options_4";
+    private static final String QUESTION_TRUE_ANSWER = "question_true_answer";
+
     // Table Creation Statement
     private static final String CREATE_TABLE_QUESTION = "CREATE TABLE IF NOT EXISTS "
             + TABLE_QUESTION + "(" + KEY_QUESTION_ID + " INTEGER PRIMARY KEY," + QUESTION_CONTENT
-            + " TEXT," + QUESTION_CATEGORY + " INTEGER" + QUESTION_DIFFICULTY + " INTEGER"
-            + QUESTION_ANSWER_OPTIONS + " INTEGER"+")";
+            + " TEXT," + QUESTION_CATEGORY + " INTEGER," + QUESTION_DIFFICULTY + " INTEGER,"
+            + QUESTION_ANSWER_OPTIONS_1 + " TEXT," + QUESTION_ANSWER_OPTIONS_2 + " TEXT,"
+            + QUESTION_ANSWER_OPTIONS_3 + " TEXT,"  + QUESTION_ANSWER_OPTIONS_4 + " TEXT,"
+            + QUESTION_TRUE_ANSWER + " INTEGER" + ")";
 
     //Constructor
 
@@ -89,6 +95,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(QUESTION_CONTENT, question.getContent());
         values.put(QUESTION_CATEGORY, question.getCategory());
         values.put(QUESTION_DIFFICULTY, question.getDifficulty());
+        values.put(QUESTION_TRUE_ANSWER, question.getTrueAnswer());
+        String[] options = question.getAnswerOptions();
+        if(options.length == 4) {
+            values.put(QUESTION_ANSWER_OPTIONS_1, options[0]);
+            values.put(QUESTION_ANSWER_OPTIONS_2, options[1]);
+            values.put(QUESTION_ANSWER_OPTIONS_3, options[2]);
+            values.put(QUESTION_ANSWER_OPTIONS_4, options[3]);
+        }
 
         // insert row
         long question_id = db.insert(TABLE_QUESTION, null, values);
@@ -101,14 +115,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         for(Question question: l) {
             ContentValues values = new ContentValues();
-
             values.put(KEY_QUESTION_ID, question.getQuestionID());
             values.put(QUESTION_CONTENT, question.getContent());
             values.put(QUESTION_CATEGORY, question.getCategory());
             values.put(QUESTION_DIFFICULTY, question.getDifficulty());
+            values.put(QUESTION_TRUE_ANSWER, question.getTrueAnswer());
+            String[] options = question.getAnswerOptions();
+            if(options.length == 4) {
+                values.put(QUESTION_ANSWER_OPTIONS_1, options[0]);
+                values.put(QUESTION_ANSWER_OPTIONS_2, options[1]);
+                values.put(QUESTION_ANSWER_OPTIONS_3, options[2]);
+                values.put(QUESTION_ANSWER_OPTIONS_4, options[3]);
+            }
 
             // insert row
-            db.insert(TABLE_QUESTION, null, values);
+            long question_id = db.insert(TABLE_QUESTION, null, values);
         }
         closeDB();
         //return question_id;
@@ -127,10 +148,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(c != null) {
             if (c.moveToFirst()) {
                 do {
-                    Question q = new Question(c.getInt(c.getColumnIndex(KEY_QUESTION_ID)),
-                            c.getString(c.getColumnIndex(QUESTION_CONTENT)),
-                            c.getInt(c.getColumnIndex(QUESTION_CATEGORY)),
-                            c.getInt(c.getColumnIndex(QUESTION_DIFFICULTY)));
+                    Question q = new Question();
+                    q.setQuestionID(c.getInt(c.getColumnIndex(KEY_QUESTION_ID)));
+                    q.setContent(c.getString(c.getColumnIndex(QUESTION_CONTENT)));
+                    q.setCategory(c.getInt(c.getColumnIndex(QUESTION_CATEGORY)));
+                    q.setDifficulty(c.getInt(c.getColumnIndex(QUESTION_DIFFICULTY)));
+                    q.setTrueAnswer(c.getInt(c.getColumnIndex(QUESTION_TRUE_ANSWER)));
+
+                    String[] options = new String[4];
+                    options[0] = c.getString(c.getColumnIndex(QUESTION_ANSWER_OPTIONS_1));
+                    options[1] = c.getString(c.getColumnIndex(QUESTION_ANSWER_OPTIONS_2));
+                    options[2] = c.getString(c.getColumnIndex(QUESTION_ANSWER_OPTIONS_3));
+                    options[3] = c.getString(c.getColumnIndex(QUESTION_ANSWER_OPTIONS_4));
+                    q.setAnswerOptions(options);
                     // adding to the list
                     questions.add(q);
                 } while (c.moveToNext());
@@ -155,10 +185,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(c != null) {
             if (c.moveToFirst()) {
                 do {
-                    Question q = new Question(c.getInt(c.getColumnIndex(KEY_QUESTION_ID)),
-                                                c.getString(c.getColumnIndex(QUESTION_CONTENT)),
-                                                c.getInt(c.getColumnIndex(QUESTION_CATEGORY)),
-                                                c.getInt(c.getColumnIndex(QUESTION_DIFFICULTY)));
+                    Question q = new Question();
+                    q.setQuestionID(c.getInt(c.getColumnIndex(KEY_QUESTION_ID)));
+                    q.setContent(c.getString(c.getColumnIndex(QUESTION_CONTENT)));
+                    q.setCategory(c.getInt(c.getColumnIndex(QUESTION_CATEGORY)));
+                    q.setDifficulty(c.getInt(c.getColumnIndex(QUESTION_DIFFICULTY)));
+                    q.setTrueAnswer(c.getInt(c.getColumnIndex(QUESTION_TRUE_ANSWER)));
+
+                    String[] options = new String[4];
+                    options[0] = c.getString(c.getColumnIndex(QUESTION_ANSWER_OPTIONS_1));
+                    options[1] = c.getString(c.getColumnIndex(QUESTION_ANSWER_OPTIONS_2));
+                    options[2] = c.getString(c.getColumnIndex(QUESTION_ANSWER_OPTIONS_3));
+                    options[3] = c.getString(c.getColumnIndex(QUESTION_ANSWER_OPTIONS_4));
+                    q.setAnswerOptions(options);
                     // adding to the list
                     questions.add(q);
                 } while (c.moveToNext());
@@ -167,7 +206,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         c.close();
         db.close();
         return questions;
-    }*/
+    }
 
     /*not yet needed*/
     //update
