@@ -12,6 +12,8 @@ public class Question {
     private String[] answerOptions;
     private int trueAnswer;
 
+    private int score;
+
     //empty constructor
     public Question() {
     }
@@ -71,5 +73,13 @@ public class Question {
 
     public void setTrueAnswer(int trueAnswer) {
         this.trueAnswer = trueAnswer;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
