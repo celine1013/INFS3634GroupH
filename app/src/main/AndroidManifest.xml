@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,6 +18,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".QuizActivity"></activity>
+        <provider
+        android:authorities ="com.example.celine.infs3634grouph.questionprovider"
+        android:name = "com.example.celine.infs3634grouph.dbHelper.QuestionProvider"
+        android:exported="false"/>
     </application>
 
 </manifest>

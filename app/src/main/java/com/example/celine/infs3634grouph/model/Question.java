@@ -1,4 +1,4 @@
-package model;
+package com.example.celine.infs3634grouph.model;
 
 /**
  * Created by Celine on 25/09/2017.

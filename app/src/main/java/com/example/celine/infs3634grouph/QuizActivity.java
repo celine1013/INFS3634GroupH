@@ -1,6 +1,6 @@
 package com.example.celine.infs3634grouph;
 
-import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,8 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import java.util.List;
-import dbHelper.DatabaseHelper;
-import model.Question;
+import com.example.celine.infs3634grouph.dbHelper.DatabaseHelper;
+import com.example.celine.infs3634grouph.dbHelper.QuestionProvider;
+import com.example.celine.infs3634grouph.model.Question;
 
 
 public class QuizActivity extends AppCompatActivity implements View.OnClickListener{
@@ -28,7 +29,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_tryAgain;
     private Button btn_tryAnother;
 
-    private int maxQuestionNum;
+    private static final int MAX_QUESTION_NUM = 10;
     private int correctNum;
     private int currentCorrect;
 
@@ -46,7 +47,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerB = (Button)findViewById(R.id.btnAnswerB);
         btn_answerC = (Button)findViewById(R.id.btnAnswerC);
         btn_answerD = (Button)findViewById(R.id.btnAnswerD);
-        show_answer = (TextView)findViewById(R.id.showAnswer);
         next_question = (Button) findViewById(R.id.nextQuestion);
         btn_tryAgain = (Button)findViewById(R.id.btnTryAgain);
         btn_tryAnother = (Button)findViewById(R.id.btnTryAnother);
