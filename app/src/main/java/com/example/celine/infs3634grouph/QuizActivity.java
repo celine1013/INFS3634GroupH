@@ -16,8 +16,10 @@ import com.example.celine.infs3634grouph.model.Question;
 
 
 public class QuizActivity extends AppCompatActivity implements View.OnClickListener{
+
     private DatabaseHelper db;
-    // TODO: 26/09/2017 declare widget fields in all layouts used in this activity
+
+    //declare widget fields in all layouts used in this activity
     private TextView show_category;
     private TextView show_questionNumber;
     private TextView show_score;
@@ -26,21 +28,24 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_answerB;
     private Button btn_answerC;
     private Button btn_answerD;
-    private TextView show_answer;
     private Button next_question;
+    private TextView show_result;
     private Button btn_tryAgain;
     private Button btn_tryAnother;
 
+    //declare
     private static final int MAX_QUESTION_NUM = 10;
     private int correctNum;
     private int currentCorrect;
+    private int currentNum = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        // TODO: 26/09/2017 binding
+        // binding
         show_category = (TextView)findViewById(R.id.textViewCategory);
         show_questionNumber = (TextView)findViewById(R.id.questionNum);
         show_score = (TextView)findViewById(R.id.textViewScore);
@@ -50,10 +55,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerC = (Button)findViewById(R.id.btnAnswerC);
         btn_answerD = (Button)findViewById(R.id.btnAnswerD);
         next_question = (Button) findViewById(R.id.nextQuestion);
-        btn_tryAgain = (Button)findViewById(R.id.btnTryAgain);
-        btn_tryAnother = (Button)findViewById(R.id.btnTryAnother);
 
-        // TODO: 26/09/2017 get questions using category data sent by main activity
         // specify a number of random questions within the specific category
         int category = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY, -1);//get category from intent
         //catch unknown error
@@ -61,34 +63,71 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             Log.e("QUIZ ACTIVITY", "NO CATEGORY RECEIVED, ACTIVITY FINISHED");
             finish();
         }
-
-        List<Question> questions ;//= db.getQuestionsByCategory(category);
-        // TODO: 26/09/2017 perform quiz activity
-        Question question = new Question();
         // show category
         show_category.setText(getResources().getString(category));
+
+        final List<Question> questions = db.getQuestionsByCategory(category);
+
+        // show the first question and answer options
+        //maxQuestionNum = questions.size();
+        //说实话不懂这个get(0);
+        Question q = questions.get(0);
+        currentCorrect = q.getTrueAnswer();
         // show question number
-        // try to use the number 1-10
-        show_questionNumber.setText(question.getQuestionID());
-        // show question
-        show_question.setText(question.getContent());
-        // show answer options
+        show_questionNumber.setText(q.getQuestionID());
+        // get questions using category data sent by main activity
+        show_question.setText(q.getContent());
+
+
+        // TODO: show answer options???????? 这个要把String[]的东西按照[0][1][2][3]的方式放进去，但是试了好多不知道怎么办了
+        btn_answerA.setText(options[0]);
+        btn_answerB.setText(q.getAnswerOptions(<1>));
+        btn_answerC.setText(q.getAnswerOptions());
+        btn_answerD.setText(q.getAnswerOptions());
+
+        // calculate score, change the text field
+        int score = 0;
+        show_score.setText(score);
 
         // verify if the user has chose the correct answer
         // if incorrect, show the correct one immediately
-        // calculate score, change the text field
-        //maxQuestionNum = questions.size();
-        //Question q = questions.get(0);
-        // TODO: 7/10/2017 show the first question and answer options
+        // TODO: Button变颜色的不知道怎么弄
+        // 按我的逻辑是if((answerChose-1).equals(q.getTrueAnswer)){
 
-        //currentCorrect = q.getTrueAnswer();
 
-        // TODO: 26/09/2017 calculate and show result
+
+
+
+
+        // calculate and show result
+
+
+        next_question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //如果(answerChose-1).equals(q.getTrueAnswer)就是对的，然后score = score + 10
+                //show_score.setText(score)
+                if(currentNum + 1 < questions.length){
+                    currentNum ++;
+                }else{
+                    currentNum = 0;
+                }
+                //这个get(1）肯定不对不知道咋弄
+                Question q = questions.get(1);
+                show_question.setText(q.getContent());
+            }
+        });
+
+
         // change layout
         setContentView(R.layout.activity_result);
-        // TODO: 7/10/2017 bind new layout
-        // show final score, etc.
+        // bind new layout
+        show_result = (TextView) findViewById(R.id.showResult);
+        btn_tryAgain = (Button)findViewById(R.id.btnTryAgain);
+        btn_tryAnother = (Button)findViewById(R.id.btnTryAnother);
 
+        // show final score, etc.
+        show_result.setText(score);
         // btn: finish->go back to main activity;
         btn_tryAnother.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,26 +139,28 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_tryAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // change layout
+                setContentView(R.layout.activity_quiz);
+                //TODO:找到此时的Category，然后重新建立所有textView
             }
         });
     }
 
     @Override
     public void onClick(View view) {
-        int answerChosed = -1;
+        int answerChose = -1;
         switch (view.getId()) {
             case R.id.btnAnswerA:
-                answerChosed = 1;
+                answerChose = 1;
                 break;
             case R.id.btnAnswerB:
-                answerChosed = 2;
+                answerChose = 2;
                 break;
             case R.id.btnAnswerC:
-                answerChosed = 3;
+                answerChose = 3;
                 break;
             case R.id.btnAnswerD:
-                answerChosed = 4;
+                answerChose = 4;
                 break;
             default:
                 // TODO: 7/10/2017 veryfy if answer chosed match currentAnswer

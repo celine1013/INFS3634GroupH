@@ -1,5 +1,6 @@
 package com.example.celine.infs3634grouph.dbHelper;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -59,6 +60,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // TODO: 12/10/2017 preload data here
         Log.d("DATABASE SETTING", "TABLE CREATION COMPLETED");
     }
+
+    /*
+    public void addQuestions(){
+
+        Question q1 = new Question(1,"What is the name of the class which is inherited to create a user" +
+                " interface screen?",2,1,{"ViewGroup","Display", "Activity","None of the above"},3,10);
+    }
+    */
 
     //onUpgrade
     @Override

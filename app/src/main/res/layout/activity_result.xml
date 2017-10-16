@@ -19,17 +19,18 @@
         android:id="@+id/showResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:paddingTop="30dp"/>
+        android:paddingTop="30dp"
+        android:textColor="@color/colorBlack" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Correct"
+        android:gravity="center"
         android:paddingBottom="150dp"
-        android:textSize="30dp"
+        android:text="Correct"
         android:textColor="@color/colorBlack"
-        android:gravity="center"/>
+        android:textSize="30dp" />
 
     <Button
         android:id="@+id/btnTryAgain"
