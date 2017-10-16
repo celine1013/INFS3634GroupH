@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             questions.add(q);
         }*/
-        db.preloadQuestions(questions);
+
         Log.v("SETTING DATABASE", "Data loading completed");
 
         // TODO: 7/10/2017 complete binding
