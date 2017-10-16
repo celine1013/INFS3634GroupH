@@ -1,14 +1,18 @@
 package com.example.celine.infs3634grouph;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Currency;
 import java.util.List;
-import dbHelper.DatabaseHelper;
-import model.Question;
+import com.example.celine.infs3634grouph.dbHelper.DatabaseHelper;
+import com.example.celine.infs3634grouph.dbHelper.QuestionProvider;
+import com.example.celine.infs3634grouph.model.Question;
 
 
 public class QuizActivity extends AppCompatActivity implements View.OnClickListener{
@@ -22,11 +26,12 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_answerB;
     private Button btn_answerC;
     private Button btn_answerD;
+    private TextView show_answer;
     private Button next_question;
     private Button btn_tryAgain;
     private Button btn_tryAnother;
 
-    private int maxQuestionNum;
+    private static final int MAX_QUESTION_NUM = 10;
     private int correctNum;
     private int currentCorrect;
 
@@ -57,17 +62,18 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             finish();
         }
 
-        List<Question> questions = db.getQuestionsByCategory(category);
+        List<Question> questions ;//= db.getQuestionsByCategory(category);
         // TODO: 26/09/2017 perform quiz activity
         Question question = new Question();
         // show category
         show_category.setText(getResources().getString(category));
-        // show question number and want to use the number 1-10
+        // show question number
+        // try to use the number 1-10
         show_questionNumber.setText(question.getQuestionID());
         // show question
         show_question.setText(question.getContent());
         // show answer options
-        
+
         // verify if the user has chose the correct answer
         // if incorrect, show the correct one immediately
         // calculate score, change the text field

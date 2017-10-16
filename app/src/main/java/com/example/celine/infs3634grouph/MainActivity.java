@@ -1,19 +1,17 @@
 package com.example.celine.infs3634grouph;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dbHelper.DatabaseHelper;
-import model.Question;
+import com.example.celine.infs3634grouph.dbHelper.DatabaseHelper;
+import com.example.celine.infs3634grouph.model.Question;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
