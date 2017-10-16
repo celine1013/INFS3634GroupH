@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         //set up database
-       // db = new DatabaseHelper(getApplicationContext());
+        db = new DatabaseHelper(getApplicationContext());
 
         //for testing convenience: will clean up all data and re-load when restart the app
-        //db.cleanDatabase();
+        db.cleanDatabase();
         Log.d("SETTING DATABASE", "Database rebuilt");
 
         //import sample data
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             questions.add(q);
         }*/
-        //db.preloadQuestions(questions);
+        db.preloadQuestions(questions);
         Log.v("SETTING DATABASE", "Data loading completed");
 
         // TODO: 7/10/2017 complete binding
