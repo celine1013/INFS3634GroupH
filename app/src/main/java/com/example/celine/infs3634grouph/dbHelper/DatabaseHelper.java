@@ -59,24 +59,59 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_QUESTION);
         // TODO: 12/10/2017 preload data here
         Log.d("DATABASE SETTING", "TABLE CREATION COMPLETED");
-        String[] options = {"ViewGroup","Display", "Activity","None of the above"};
+        String[] options1 = {"ViewGroup","Display", "Activity","None of the above"};
         Question q = new Question(1,"What is the name of the class which is inherited to create a user view ?",
-                Question.EASY,Question.CATE_O1_GENERAL,options,3);
+                Question.EASY,Question.CATE_O1_GENERAL,options1,3);
         createQuestion(q);
 
         // TODO: 17/10/2017 fill in below and create more;
-        options = {};
-        q = new Question();
+        String[] options2 = {"Application","Manifest","Activity","Action"};
+        q = new Question(2, "The root element of AndroidManifest.xml is:",
+                Question.EASY,Question.CATE_O1_GENERAL,options2,2);
         createQuestion(q);
-    }
 
-    /*
-    public void addQuestions(){
+        String[] options3 = {"/assets","/src","/res/values","/res/layout"};
+        q = new Question(3, "In which directory are the XML layout files stored in an android application:",
+                Question.EASY,Question.CATE_O1_GENERAL,options3,4);
+        createQuestion(q);
 
-        Question q1 = new Question(1,"What is the name of the class which is inherited to create a user" +
-                " interface screen?",2,1,{"ViewGroup","Display", "Activity","None of the above"},3,10);
+        String[] options4 = {"Relative Layout","Frame Layout","Linear Layout","Grid Layout"};
+        q = new Question(4, "Name the layout where the positions of the children can be described in relation to each other or the parent:",
+                Question.MED,Question.CATE_O1_GENERAL,options4,1);
+        createQuestion(q);
+
+        String[] options5 = {"onCreate()","findViewById()","setContentView","None of the above"};
+        q = new Question(5, "Select the method used to access a view element of a layout resource in an activity:",
+                Question.MED,Question.CATE_O1_GENERAL,options5,2);
+        createQuestion(q);
+
+        String[] options6 = {"R.style","X.style","Manifest.XML","Application"};
+        q = new Question(6, "Android provides a few standard themes, listed in__________?",
+                Question.HARD,Question.CATE_O1_GENERAL,options6,1);
+        createQuestion(q);
+
+        String[] options7 = {"Resources","Dalvik Executable","Both a and b","None of above\n"};
+        q = new Question(7, "Which of the following(s) is/are component of APK file?",
+                Question.HARD,Question.CATE_O1_GENERAL,options7,3);
+        createQuestion(q);
+
+        String[] options8 = {"Desktop Operating System","Programming Language","Mobile Operating System","Database"};
+        q = new Question(8, "What is android?",
+                Question.EASY,Question.CATE_O1_GENERAL,options8,3);
+        createQuestion(q);
+
+        String[] options9 = {"HTC Hero","Google gPhone","T-Mobile G1","Motorola Droid"};
+        q = new Question(9, "What was the first phone released that ran the Android OS?",
+                Question.EASY,Question.CATE_O1_GENERAL,options9,3);
+        createQuestion(q);
+
+        String[] options10 = {"Only Radio interface layer and alarm are in active mode","Switched off","Airplane mode","None of the Above"};
+        q = new Question(10, "What is sleep mode in android?",
+                Question.HARD,Question.CATE_O1_GENERAL,options10,1);
+        createQuestion(q);
+
+
     }
-    */
 
     //onUpgrade
     @Override
