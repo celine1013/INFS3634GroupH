@@ -321,47 +321,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String[] options33 = {"onStop()","onPause()","onDestory()","onRestart()"};
         q = new Question(33, "If an activity is finishing, the system calls which method:",
-                Question.MED,Question.CATE_O3_GOOGLE,options33,3);
+                Question.MED,Question.CATE_O4_ACTIVITY,options33,3);
         createQuestion(q);
 
         String[] options34 = {"onStop()","onPause()","onStart()","onDestory()"};
         q = new Question(34, "The foreground lifetime of an activity happens between the call to onResume() " +
                 "and the call to __________. During this time, the activity is in front of all other activities" +
                 "on screen and has user input focus.",
-                Question.HARD,Question.CATE_O3_GOOGLE,options34,2);
+                Question.HARD,Question.CATE_O4_ACTIVITY,options34,2);
         createQuestion(q);
 
         String[] options35 = {"onSaveActivity()","onSaveInstanceState()","onRestoreInstanceState()","onSaveBundle()"};
         q = new Question(35, "you can ensure that important information about the activity state is " +
                 "preserved by implementing an additional callback method called: ",
-                Question.HARD,Question.CATE_O3_GOOGLE,options35,2);
+                Question.HARD,Question.CATE_O4_ACTIVITY,options35,2);
         createQuestion(q);
 
         String[] options36 = {"Not possible","Wrong question","Yes, it is possible","None of the above"};
         q = new Question(36, "Is it possible to have an activity without UI to perform action/actions?",
-                Question.MED,Question.CATE_O3_GOOGLE,options36,3);
+                Question.MED,Question.CATE_O4_ACTIVITY,options36,3);
         createQuestion(q);
 
         String[] options37 = {"No, we can write the program without writing onCreate() and onStart()",
                 "Yes, we should call onCreate() and onStart() to write the program","At least we need to call onCreate() once","None of the above"};
         q = new Question(37, "Is it mandatory to call onCreate() and onStart() in android?",
-                Question.EASY,Question.CATE_O3_GOOGLE,options37,1);
+                Question.EASY,Question.CATE_O4_ACTIVITY,options37,1);
         createQuestion(q);
 
         String[] options38 = {"getAction()","getData()","getIntent()","getExtra()"};
         q = new Question(38, "An intent can also contain additional data based on an instance of the Bundle class which can be retrieved from the intent using which method:",
-                Question.MED,Question.CATE_O3_GOOGLE,options38,4);
+                Question.MED,Question.CATE_O4_ACTIVITY,options38,4);
         createQuestion(q);
 
         String[] options39 = {"onAnchor()","onCreateFragment()","onAttach()","onConnect()"};
         q = new Question(39, "onCreate of activity adds the fragment and in this moment __________ is called:",
-                Question.EASY,Question.CATE_O3_GOOGLE,options39,3);
+                Question.EASY,Question.CATE_O4_ACTIVITY,options39,3);
         createQuestion(q);
 
         String[] options40 = {"Binder is responsible to manage the thread while using aidl in android",
                 "Binder is responsible for marshalling and unmarshalling of the data","A & B","Binder is a kind of interface"};
         q = new Question(40, "What are the functionalities of Binder services in android?",
-                Question.HARD,Question.CATE_O3_GOOGLE,options40,3);
+                Question.HARD,Question.CATE_O4_ACTIVITY,options40,3);
         createQuestion(q);
 
         // Fragment Questions

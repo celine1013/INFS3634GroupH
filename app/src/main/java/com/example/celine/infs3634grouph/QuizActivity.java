@@ -48,7 +48,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private List<Question> questions_l;
     private String[] options;
     private int scoreTotal = 0;
-    private int curSocre = 10;
+    private int curSocre = 20;
     private Question q;
     private ContentResolver cr;
 
@@ -182,7 +182,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         q = questions_l.get(currentNum);
         currentCorrect = q.getTrueAnswer();
         // show question number
-        show_questionNumber.setText(String.valueOf(currentNum));
+        show_questionNumber.setText(String.valueOf(currentNum + 1));
         // get questions using category data sent by main activity
         show_question.setText(q.getContent());
 
