@@ -59,6 +59,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_QUESTION);
         // TODO: 12/10/2017 preload data here
         Log.d("DATABASE SETTING", "TABLE CREATION COMPLETED");
+        String[] options = {"ViewGroup","Display", "Activity","None of the above"};
+        Question q = new Question(1,"What is the name of the class which is inherited to create a user view ?",
+                Question.EASY,Question.CATE_O1_GENERAL,options,3);
+        createQuestion(q);
+
+        // TODO: 17/10/2017 fill in below and create more;
+        options = {};
+        q = new Question();
+        createQuestion(q);
     }
 
     /*
