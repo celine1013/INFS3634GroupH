@@ -9,8 +9,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_above="@+id/quickStartBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,23 +36,23 @@
                         android:id="@+id/icon_cate01"
                         android:layout_width="wrap_content"
                         android:layout_height="120dp"
-                        android:adjustViewBounds="true"
-                        app:srcCompat="@mipmap/general"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@mipmap/general" />
 
                     <TextView
                         android:id="@+id/textView1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="false"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/icon_cate01"
                         android:fontFamily="casual"
+                        android:paddingLeft="30dp"
                         android:text="@string/category_01"
                         android:textSize="24dp"
-                        android:paddingLeft="30dp"
-                        android:textStyle="bold"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@+id/icon_cate01" />
+                        android:textStyle="bold" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
@@ -73,10 +74,10 @@
                         android:id="@+id/icon_cate02"
                         android:layout_width="wrap_content"
                         android:layout_height="120dp"
-                        android:adjustViewBounds="true"
-                        app:srcCompat="@mipmap/fundamentals"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@mipmap/fundamentals" />
 
                     <TextView
                         android:id="@+id/textView2"
@@ -88,9 +89,9 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/icon_cate02"
                         android:fontFamily="casual"
+                        android:paddingLeft="30dp"
                         android:text="@string/category_02"
                         android:textSize="24dp"
-                        android:paddingLeft="30dp"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -113,10 +114,10 @@
                         android:id="@+id/icon_cate03"
                         android:layout_width="wrap_content"
                         android:layout_height="120dp"
-                        android:adjustViewBounds="true"
-                        app:srcCompat="@mipmap/google"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@mipmap/google" />
 
                     <TextView
                         android:id="@+id/textView3"
@@ -128,9 +129,9 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/icon_cate03"
                         android:fontFamily="casual"
+                        android:paddingLeft="30dp"
                         android:text="@string/category_03"
                         android:textSize="24dp"
-                        android:paddingLeft="30dp"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -153,10 +154,10 @@
                         android:id="@+id/icon_cate04"
                         android:layout_width="wrap_content"
                         android:layout_height="120dp"
-                        android:adjustViewBounds="true"
-                        app:srcCompat="@mipmap/activity"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@mipmap/activity" />
 
                     <TextView
                         android:id="@+id/textView4"
@@ -168,9 +169,9 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/icon_cate04"
                         android:fontFamily="casual"
+                        android:paddingLeft="30dp"
                         android:text="@string/category_04"
                         android:textSize="24dp"
-                        android:paddingLeft="30dp"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -193,10 +194,10 @@
                         android:id="@+id/icon_cate05"
                         android:layout_width="wrap_content"
                         android:layout_height="120dp"
-                        android:adjustViewBounds="true"
-                        app:srcCompat="@mipmap/fragments"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@mipmap/fragments" />
 
                     <TextView
                         android:id="@+id/textView5"
@@ -208,9 +209,9 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/icon_cate05"
                         android:fontFamily="casual"
+                        android:paddingLeft="30dp"
                         android:text="@string/category_05"
                         android:textSize="24dp"
-                        android:paddingLeft="30dp"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -233,10 +234,10 @@
                         android:id="@+id/icon_cate06"
                         android:layout_width="wrap_content"
                         android:layout_height="120dp"
-                        android:adjustViewBounds="true"
-                        app:srcCompat="@mipmap/intents"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@mipmap/intents" />
 
                     <TextView
                         android:id="@+id/textView6"
@@ -248,9 +249,9 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/icon_cate06"
                         android:fontFamily="casual"
+                        android:paddingLeft="30dp"
                         android:text="@string/category_06"
                         android:textSize="24dp"
-                        android:paddingLeft="30dp"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -273,10 +274,10 @@
                         android:id="@+id/icon_cate07"
                         android:layout_width="wrap_content"
                         android:layout_height="120dp"
-                        android:adjustViewBounds="true"
-                        app:srcCompat="@mipmap/database"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@mipmap/database" />
 
                     <TextView
                         android:id="@+id/textView7"
@@ -288,9 +289,9 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/icon_cate07"
                         android:fontFamily="casual"
+                        android:paddingLeft="30dp"
                         android:text="@string/category_07"
                         android:textSize="24dp"
-                        android:paddingLeft="30dp"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
