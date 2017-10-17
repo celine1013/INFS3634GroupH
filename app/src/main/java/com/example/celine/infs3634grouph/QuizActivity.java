@@ -88,7 +88,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         next_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //如果(answerChose-1).equals(q.getTrueAnswer)就是对的，然后score = score + 10
+
                 //show_score.setText(score)
                 if(currentNum < questions.size()){
                     currentNum ++;
@@ -128,7 +128,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 // 7/10/2017 veryfy if answer chosed match currentAnswer
                 //if matched, currentCorrect increase, show correct notification, score changed
                 //if mismatched, show incorrect notification
-                // 按我的逻辑是if((answerChose-1).equals(q.getTrueAnswer)){
+                // 按我的逻辑是if((answerChose-1).equals(q.getTrueAnswer))
+                // 如果(answerChose-1).equals(q.getTrueAnswer)就是对的，然后score = score + 10
                 if(answerChose == currentCorrect){
                     correctNum++;
                     scoreTotal += curSocre;
