@@ -34,7 +34,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3sp"
-                android:background="#cccccc" />
+                android:background="@color/colorGray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,17 +85,19 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3sp"
-                android:background="#cccccc" />
+                android:background="@color/colorGray" />
 
             <TextView
                 android:id="@+id/question_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:paddingTop="15dp"
                 android:fontFamily="casual"
                 android:paddingBottom="30dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+                android:textSize="18dp"/>
 
         </LinearLayout>
 

@@ -39,6 +39,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private TextView show_result;
     private Button btn_tryAgain;
     private Button btn_tryAnother;
+    private TextView show_correctNum;
 
     //declare
     private static final int MAX_QUESTION_NUM = 10;
@@ -115,6 +116,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+
+
+
 
         
     }
@@ -206,6 +210,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         show_result = (TextView) findViewById(R.id.showResult);
         btn_tryAgain = (Button)findViewById(R.id.btnTryAgain);
         btn_tryAnother = (Button)findViewById(R.id.btnTryAnother);
+        show_correctNum = (TextView)findViewById(R.id.showCorrectNum);
 
         // show final score, etc.
         // TODO: 17/10/2017 change the layout of result: score, correct num
@@ -229,6 +234,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 QuizActivity.this.recreate();
             }
         });
+        // show correct answer number x/5
+        show_correctNum.setText(String.valueOf(correctNum));
     }
 
     public List<Question> getAllQuestions() {
