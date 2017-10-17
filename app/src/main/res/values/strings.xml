@@ -23,4 +23,5 @@
 
     <string name="correct_notification">You are absolutely right ! :)</string>
     <string name="incorrect_notification">Study harder! :(</string>
+    <string name="text_quickStart">QUICK START</string>
 </resources>
