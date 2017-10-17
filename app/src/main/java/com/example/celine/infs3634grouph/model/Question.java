@@ -14,6 +14,18 @@ public class Question {
 
     private int score;
 
+    public static final int EASY = 1;
+    public static final int MED = 2;
+    public static final int HARD = 3;
+
+    public static final int CATE_O1_GENERAL = 1;
+    public static final int CATE_O2_FUNDAMENTAL = 2;
+    public static final int CATE_O3_GOOGLE = 3;
+    public static final int CATE_O4_ACTIVITY = 4;
+    public static final int CATE_O5_FRAGMENT = 5;
+    public static final int CATE_O6_INTENT = 6;
+    public static final int CATE_O7_DATABASE = 7;
+
     //empty constructor
     public Question() {
     }
