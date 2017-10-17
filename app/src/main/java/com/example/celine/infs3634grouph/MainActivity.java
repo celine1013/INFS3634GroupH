@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -42,13 +43,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //declare all widgets
     private Button btn_quickStart;
-    private Button btn_general;
-    private Button btn_fundamentals;
-    private Button btn_google;
-    private Button btn_activities;
-    private Button btn_fragments;
-    private Button btn_intent;
-    private Button btn_database;
+    private CardView btn_general;
+    private CardView btn_fundamentals;
+    private CardView btn_google;
+    private CardView btn_activities;
+    private CardView btn_fragments;
+    private CardView btn_intent;
+    private CardView btn_database;
 
     public static final String TAG_CATEGORY_SHOW = "category_str";
     public static final String TAG_CATEGORY_DATA = "category_dat";
@@ -57,17 +58,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_page);
         setDatabase();
         // TODO: 7/10/2017 complete binding
-        btn_quickStart = (Button)findViewById(R.id.quickStartBtn);
-        btn_general = (Button)findViewById(R.id.btnGeneral);
-        btn_fundamentals = (Button)findViewById(R.id.btnFundamentals);
-        btn_fragments = (Button)findViewById(R.id.btnFragments);
-        btn_activities = (Button)findViewById(R.id.btnActivity);
-        btn_google = (Button)findViewById(R.id.btnGoogle);
-        btn_intent = (Button)findViewById(R.id.btnIntent);
-        btn_database = (Button)findViewById(R.id.btnDatabase);
+        btn_quickStart = (Button) findViewById(R.id.quickStartBtn);
+        btn_general = (CardView)findViewById(R.id.btn_general);
+        btn_fundamentals = (CardView)findViewById(R.id.btn_fundamental);
+        btn_fragments = (CardView)findViewById(R.id.btn_fragments);
+        btn_activities = (CardView)findViewById(R.id.btn_activities);
+        btn_google = (CardView)findViewById(R.id.btn_google);
+        btn_intent = (CardView)findViewById(R.id.btn_intents);
+        btn_database = (CardView)findViewById(R.id.btn_database);
 
         // TODO: 7/10/2017 complete setting onclickListener
         btn_quickStart.setOnClickListener(this);
@@ -87,31 +88,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
 
             //send info of diff categories to quiz activities;
-            case R.id.btnGeneral:
+            case R.id.btn_general:
                 intent.putExtra(TAG_CATEGORY_SHOW, CATEGORY_01);
                 intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O1_GENERAL);
                 break;
-            case R.id.btnFundamentals:
+            case R.id.btn_fundamental:
                 intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_02);
                 intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O2_FUNDAMENTAL);
                 break;
-            case R.id.btnGoogle:
+            case R.id.btn_google:
                 intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_03);
                 intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O3_GOOGLE);
                 break;
-            case R.id.btnActivity:
+            case R.id.btn_activities:
                 intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_04);
                 intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O4_ACTIVITY);
                 break;
-            case R.id.btnFragments:
+            case R.id.btn_fragments:
                 intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_05);
                 intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O5_FRAGMENT);
                 break;
-            case R.id.btnIntent:
+            case R.id.btn_intents:
                 intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_06);
                 intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O6_INTENT);
                 break;
-            case R.id.btnDatabase:
+            case R.id.btn_database:
                 intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_07);
                 intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O7_DATABASE);
                 break;
