@@ -51,14 +51,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_intent;
     private Button btn_database;
 
-    public static final String TAG_CATEGORY = "category";
+    public static final String TAG_CATEGORY_SHOW = "category_str";
+    public static final String TAG_CATEGORY_DATA = "category_dat";
     private ContentResolver cr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setDatabase();
         // TODO: 7/10/2017 complete binding
         btn_quickStart = (Button)findViewById(R.id.quickStartBtn);
         btn_general = (Button)findViewById(R.id.btnGeneral);
@@ -88,28 +89,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             //send info of diff categories to quiz activities;
             case R.id.btnGeneral:
-                intent.putExtra(TAG_CATEGORY, CATEGORY_01);
+                intent.putExtra(TAG_CATEGORY_SHOW, CATEGORY_01);
+                intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O1_GENERAL);
                 break;
             case R.id.btnFundamentals:
-                intent.putExtra(TAG_CATEGORY,CATEGORY_02);
+                intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_02);
+                intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O2_FUNDAMENTAL);
                 break;
             case R.id.btnGoogle:
-                intent.putExtra(TAG_CATEGORY,CATEGORY_03);
+                intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_03);
+                intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O3_GOOGLE);
                 break;
             case R.id.btnActivity:
-                intent.putExtra(TAG_CATEGORY,CATEGORY_04);
+                intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_04);
+                intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O4_ACTIVITY);
                 break;
             case R.id.btnFragments:
-                intent.putExtra(TAG_CATEGORY,CATEGORY_05);
+                intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_05);
+                intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O5_FRAGMENT);
                 break;
             case R.id.btnIntent:
-                intent.putExtra(TAG_CATEGORY,CATEGORY_06);
+                intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_06);
+                intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O6_INTENT);
                 break;
             case R.id.btnDatabase:
-                intent.putExtra(TAG_CATEGORY,CATEGORY_07);
+                intent.putExtra(TAG_CATEGORY_SHOW,CATEGORY_07);
+                intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_O7_DATABASE);
                 break;
             case R.id.quickStartBtn:
-                intent.putExtra(TAG_CATEGORY, CATEGORY_RANDOM);
+                intent.putExtra(TAG_CATEGORY_SHOW, CATEGORY_RANDOM);
+                intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_RANDOM);
                 break;
         }
         startActivity(intent);
