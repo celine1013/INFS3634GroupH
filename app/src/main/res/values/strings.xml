@@ -9,6 +9,7 @@
     <string name="category_04">Activities</string>
     <string name="category_05">Fragment</string>
     <string name="category_06">Intent</string>
+    <string name="category_07">Database</string>
 
 
     <string name="tryAgain">Try Again</string>

@@ -89,17 +89,20 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         int score = 0;
         show_score.setText(score);
 
+
+
+        // calculate and show result
         // verify if the user has chose the correct answer
         // if incorrect, show the correct one immediately
         // TODO: Button变颜色的不知道怎么弄
         // 按我的逻辑是if((answerChose-1).equals(q.getTrueAnswer)){
+        btn_answerA.setOnClickListener(this);
+        btn_answerB.setOnClickListener(this);
+        btn_answerC.setOnClickListener(this);
+        btn_answerD.setOnClickListener(this);
 
 
 
-
-
-
-        // calculate and show result
 
 
         next_question.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +173,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
                 //show true answer no matter whether the user answer correctly
                 //true answer btn's background color turns green, others turn green
+                //score change
+
         }
     }
 }

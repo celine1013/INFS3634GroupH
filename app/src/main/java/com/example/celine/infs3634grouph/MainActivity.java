@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final int CATEGORY_04 = R.string.category_04;
     public static final int CATEGORY_05 = R.string.category_05;
     public static final int CATEGORY_06 = R.string.category_06;
-    //public static final int CATEGORY_07 = R.string.category_07;
+    public static final int CATEGORY_07 = R.string.category_07;
 
     // TODO: 7/10/2017 declare all widgets
     private Button btn_quickStart;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_activities;
     private Button btn_fragments;
     private Button btn_intent;
-    //private Button btn_database;
+    private Button btn_database;
 
     public static final String TAG_CATEGORY = "category";
 
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_activities = (Button)findViewById(R.id.btnActivity);
         btn_google = (Button)findViewById(R.id.btnGoogle);
         btn_intent = (Button)findViewById(R.id.btnIntent);
-        //btn_database = (Button)findViewById(R.id.btnDatabase);
+        btn_database = (Button)findViewById(R.id.btnDatabase);
 
         // TODO: 7/10/2017 complete setting onclickListener
         btn_quickStart.setOnClickListener(this);
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_activities.setOnClickListener(this);
         btn_fragments.setOnClickListener(this);
         btn_intent.setOnClickListener(this);
-        //btn_batabase.setOnClickListener(this);
+        btn_database.setOnClickListener(this);
 
     }
     // TODO: 7/10/2017 complete onclick
@@ -126,9 +126,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnIntent:
                 intent.putExtra(TAG_CATEGORY,CATEGORY_06);
                 break;
-            //case R.id.btnDatabase:
-            //    intent.putExtra(TAG_CATEGORY,CATEGORY_07);
-            //    break;
+            case R.id.btnDatabase:
+                intent.putExtra(TAG_CATEGORY,CATEGORY_07);
+                break;
             case R.id.quickStartBtn:
                 intent.putExtra(TAG_CATEGORY, CATEGORY_RANDOM);
                 break;
