@@ -113,8 +113,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                     currentNum = 0;
                     showresult();
                 }
-                //这个get(1）肯定不对不知道咋弄
-                
             }
         });
 
@@ -140,11 +138,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 answerChose = 4;
                 break;
         }
-        // 7/10/2017 veryfy if answer chosed match currentAnswer
+        // 7/10/2017 veryfy if answer chose match currentAnswer
         //if matched, currentCorrect increase, show correct notification, score changed
         //if mismatched, show incorrect notification
-        // 按我的逻辑是if((answerChose-1).equals(q.getTrueAnswer))
-        // 如果(answerChose-1).equals(q.getTrueAnswer)就是对的，然后score = score + 10
         if(answerChose == currentCorrect){
             correctNum++;
             scoreTotal += curSocre;
@@ -170,7 +166,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 correctButton = R.id.btnAnswerD;
                 break;
         }
-        // Button变颜色的不知道怎么弄
         btn_answerA.setBackgroundColor(getColor(R.color.colorRed));
         btn_answerB.setBackgroundColor(getColor(R.color.colorRed));
         btn_answerC.setBackgroundColor(getColor(R.color.colorRed));
@@ -184,7 +179,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private void showQuestion(){
         // show the first question and answer options
         //maxQuestionNum = questions.size();
-        //说实话不懂这个get(0);
         q = questions_l.get(currentNum);
         currentCorrect = q.getTrueAnswer();
         // show question number
@@ -193,16 +187,16 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         show_question.setText(q.getContent());
 
         options = q.getAnswerOptions();
-        // show answer options???????? 这个要把String[]的东西按照[0][1][2][3]的方式放进去，但是试了好多不知道怎么办了
+        // show answer options
         btn_answerA.setText(options[0]);
         btn_answerB.setText(options[1]);
         btn_answerC.setText(options[2]);
         btn_answerD.setText(options[3]);
 
-        btn_answerA.setBackgroundColor(getColor(R.color.colorBlue));
-        btn_answerB.setBackgroundColor(getColor(R.color.colorBlue));
-        btn_answerC.setBackgroundColor(getColor(R.color.colorBlue));
-        btn_answerD.setBackgroundColor(getColor(R.color.colorBlue));
+        btn_answerA.setBackgroundColor(getColor(R.color.colorBlueness));
+        btn_answerB.setBackgroundColor(getColor(R.color.colorBlueness));
+        btn_answerC.setBackgroundColor(getColor(R.color.colorBlueness));
+        btn_answerD.setBackgroundColor(getColor(R.color.colorBlueness));
     }
     
     private void showresult(){
@@ -229,7 +223,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 // change layout
                 setContentView(R.layout.activity_quiz);
-                //找到此时的Category，然后重新建立所有textView
                 /*Intent intent = getIntent();
                 finish();
                 startActivity(intent);*/
