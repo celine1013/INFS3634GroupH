@@ -72,13 +72,13 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         }
         // show category
         show_category.setText(getResources().getString(category));
+
         db = new DatabaseHelper(this);
+
         final List<Question> questions = db.getQuestionsByCategory(category);
-        
 
         // calculate score, change the text field
         show_score.setText(scoreTotal);
-
 
         btn_answerA.setOnClickListener(this);
         btn_answerB.setOnClickListener(this);
@@ -88,23 +88,17 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         next_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //如果(answerChose-1).equals(q.getTrueAnswer)就是对的，然后score = score + 10
-                //show_score.setText(score)
+
                 if(currentNum < questions.size()){
                     currentNum ++;
                     showQuestion();
                     show_score.setText(scoreTotal);
-                    
                 }else{
                     currentNum = 0;
                     showresult();
                 }
-                //这个get(1）肯定不对不知道咋弄
-                
             }
         });
-
-        
     }
 
     @Override
@@ -125,10 +119,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 answerChose = 4;
                 break;
             default:
-                // 7/10/2017 veryfy if answer chosed match currentAnswer
+                // 7/10/2017 verify if answer chose match currentAnswer
                 //if matched, currentCorrect increase, show correct notification, score changed
                 //if mismatched, show incorrect notification
-                // 按我的逻辑是if((answerChose-1).equals(q.getTrueAnswer)){
                 if(answerChose == currentCorrect){
                     correctNum++;
                     scoreTotal += curSocre;
@@ -178,7 +171,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         show_question.setText(q.getContent());
 
         options = q.getAnswerOptions();
-        // show answer options???????? 这个要把String[]的东西按照[0][1][2][3]的方式放进去，但是试了好多不知道怎么办了
+        // show answer options
         btn_answerA.setText(options[0]);
         btn_answerB.setText(options[1]);
         btn_answerC.setText(options[2]);
