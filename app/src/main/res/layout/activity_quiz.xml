@@ -48,39 +48,35 @@
         android:paddingBottom="100dp"/>
 
     <Button
+        android:id="@+id/nextQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:textColor="@color/colorBlack" />
+
+    <Button
         android:id="@+id/btnAnswerA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:backgroundTint="@color/colorGreen" />
+        android:textColor="@color/colorBlack" />
 
     <Button
         android:id="@+id/btnAnswerB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:backgroundTint="@color/colorGreen"/>
+        android:textColor="@color/colorBlack" />
 
     <Button
         android:id="@+id/btnAnswerC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:backgroundTint="@color/colorGreen"/>
+        android:textColor="@color/colorBlack" />
 
     <Button
         android:id="@+id/btnAnswerD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:backgroundTint="@color/colorGreen"/>
-
-
-    <Button
-        android:id="@+id/nextQuestion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorBlue"
-        android:padding="20dp"
         android:textColor="@color/colorBlack" />
+
+
 </LinearLayout>

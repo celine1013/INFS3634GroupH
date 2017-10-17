@@ -51,8 +51,9 @@ public class QuestionProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        return database.query(DatabaseContract.QuestionEntry.TABLE_QUESTION, DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS,
-                selection, null, null, null, null, " RANDOM() LIMIT "+MAX_QUESTION_NUM);
+        return database.query(DatabaseContract.QuestionEntry.TABLE_QUESTION
+                , DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS
+                , selection, null, null, null, sortOrder);
     }
 
     @Nullable
@@ -84,5 +85,6 @@ public class QuestionProvider extends ContentProvider {
         return database.update(DatabaseContract.QuestionEntry.TABLE_QUESTION, contentValues,
                 selection, selectionArgs);
     }
+
 
 }

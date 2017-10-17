@@ -1,5 +1,6 @@
 package com.example.celine.infs3634grouph;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
+
+import com.example.celine.infs3634grouph.dbHelper.DatabaseContract;
 import com.example.celine.infs3634grouph.dbHelper.DatabaseHelper;
 import com.example.celine.infs3634grouph.dbHelper.QuestionProvider;
 import com.example.celine.infs3634grouph.model.Question;
@@ -39,19 +43,21 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     //declare
     private static final int MAX_QUESTION_NUM = 10;
     private int correctNum;
-    private int currentCorrect;
+    private int currentCorrect = 0;
     private int currentNum = 0;
-    private List<Question> questions;
+    private List<Question> questions_l;
     private String[] options;
     private int scoreTotal = 0;
     private int curSocre = 10;
     private Question q;
+    private ContentResolver cr;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
         // binding
         show_category = (TextView)findViewById(R.id.textViewCategory);
         show_questionNumber = (TextView)findViewById(R.id.questionNum);
@@ -63,22 +69,30 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerD = (Button)findViewById(R.id.btnAnswerD);
         next_question = (Button) findViewById(R.id.nextQuestion);
 
+        cr = getContentResolver();
+
         // specify a number of random questions within the specific category
-        int category = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY, -1);//get category from intent
+        int category_str = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY_SHOW, -1);//get category from intent
         //catch unknown error
-        if(category == -1){
+        if(category_str == -1){
             Log.e("QUIZ ACTIVITY", "NO CATEGORY RECEIVED, ACTIVITY FINISHED");
             finish();
         }
         // show category
-        show_category.setText(getResources().getString(category));
-        db = new DatabaseHelper(this);
-        final List<Question> questions = db.getQuestionsByCategory(category);
+        show_category.setText(getResources().getString(category_str));
+
+        int category_dat = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY_DATA, -1);
+        if(category_dat == Question.CATE_RANDOM){
+            questions_l = getAllQuestions();
+        }else{
+            questions_l = getQuestionsByCategory(category_dat);
+        }
+
         
 
         // calculate score, change the text field
-        show_score.setText(scoreTotal);
-
+        show_score.setText(String.valueOf(scoreTotal));
+        showQuestion();
 
         btn_answerA.setOnClickListener(this);
         btn_answerB.setOnClickListener(this);
@@ -90,10 +104,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
 
                 //show_score.setText(score)
-                if(currentNum < questions.size()){
+                if(currentNum + 1 < questions_l.size()){
                     currentNum ++;
                     showQuestion();
-                    show_score.setText(scoreTotal);
+                    show_score.setText(String.valueOf(scoreTotal));
                     
                 }else{
                     currentNum = 0;
@@ -109,6 +123,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        Log.d("ANSWERING", "ANSWER CLICKED");
         int answerChose = -1;
         int correctButton = 0;
         switch (view.getId()) {
@@ -124,57 +139,56 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnAnswerD:
                 answerChose = 4;
                 break;
-            default:
-                // 7/10/2017 veryfy if answer chosed match currentAnswer
-                //if matched, currentCorrect increase, show correct notification, score changed
-                //if mismatched, show incorrect notification
-                // 按我的逻辑是if((answerChose-1).equals(q.getTrueAnswer))
-                // 如果(answerChose-1).equals(q.getTrueAnswer)就是对的，然后score = score + 10
-                if(answerChose == currentCorrect){
-                    correctNum++;
-                    scoreTotal += curSocre;
-                    correctButton = currentCorrect;
-                    Toast.makeText(QuizActivity.this, getResources().getString(R.string.correct_notification), Toast.LENGTH_SHORT);
-                }else{
-                    Toast.makeText(QuizActivity.this, getResources().getString(R.string.incorrect_notification), Toast.LENGTH_SHORT);
-                }
-                //show true answer no matter whether the user answer correctly
-                //true answer btn's background color turns green, others turn green
-                //score change
-
-                switch (currentCorrect){
-                    case 1:
-                        correctButton = R.id.btnAnswerA;
-                        break;
-                    case 2:
-                        correctButton = R.id.btnAnswerB;
-                        break;
-                    case 3:
-                        correctButton = R.id.btnAnswerC;
-                        break;
-                    case 4:
-                        correctButton = R.id.btnAnswerD;
-                        break;
-                }
-                // Button变颜色的不知道怎么弄
-                btn_answerA.setBackgroundColor(getColor(R.color.colorRed));
-                btn_answerB.setBackgroundColor(getColor(R.color.colorRed));
-                btn_answerC.setBackgroundColor(getColor(R.color.colorRed));
-                btn_answerD.setBackgroundColor(getColor(R.color.colorRed));
-                Button btn_choose = (Button)findViewById(correctButton);
-                btn_choose.setBackgroundColor(getColor(R.color.colorGreen));
-
         }
+        // 7/10/2017 veryfy if answer chosed match currentAnswer
+        //if matched, currentCorrect increase, show correct notification, score changed
+        //if mismatched, show incorrect notification
+        // 按我的逻辑是if((answerChose-1).equals(q.getTrueAnswer))
+        // 如果(answerChose-1).equals(q.getTrueAnswer)就是对的，然后score = score + 10
+        if(answerChose == currentCorrect){
+            correctNum++;
+            scoreTotal += curSocre;
+            correctButton = currentCorrect;
+            Toast.makeText(QuizActivity.this, getResources().getString(R.string.correct_notification), Toast.LENGTH_LONG);
+        }else{
+            Toast.makeText(QuizActivity.this, getResources().getString(R.string.incorrect_notification), Toast.LENGTH_LONG);
+        }
+        //show true answer no matter whether the user answer correctly
+        //true answer btn's background color turns green, others turn green
+        //score change
+        switch (currentCorrect){
+            case 1:
+                correctButton = R.id.btnAnswerA;
+                break;
+            case 2:
+                correctButton = R.id.btnAnswerB;
+                break;
+            case 3:
+                correctButton = R.id.btnAnswerC;
+                break;
+            case 4:
+                correctButton = R.id.btnAnswerD;
+                break;
+        }
+        // Button变颜色的不知道怎么弄
+        btn_answerA.setBackgroundColor(getColor(R.color.colorRed));
+        btn_answerB.setBackgroundColor(getColor(R.color.colorRed));
+        btn_answerC.setBackgroundColor(getColor(R.color.colorRed));
+        btn_answerD.setBackgroundColor(getColor(R.color.colorRed));
+        Button btn_choose = (Button)findViewById(correctButton);
+        btn_choose.setBackgroundColor(getColor(R.color.colorGreen));
+
     }
+
     
     private void showQuestion(){
         // show the first question and answer options
         //maxQuestionNum = questions.size();
         //说实话不懂这个get(0);
-        q = questions.get(currentNum);
+        q = questions_l.get(currentNum);
         currentCorrect = q.getTrueAnswer();
         // show question number
-        show_questionNumber.setText(currentNum);
+        show_questionNumber.setText(String.valueOf(currentNum));
         // get questions using category data sent by main activity
         show_question.setText(q.getContent());
 
@@ -184,6 +198,11 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerB.setText(options[1]);
         btn_answerC.setText(options[2]);
         btn_answerD.setText(options[3]);
+
+        btn_answerA.setBackgroundColor(getColor(R.color.colorBlue));
+        btn_answerB.setBackgroundColor(getColor(R.color.colorBlue));
+        btn_answerC.setBackgroundColor(getColor(R.color.colorBlue));
+        btn_answerD.setBackgroundColor(getColor(R.color.colorBlue));
     }
     
     private void showresult(){
@@ -196,7 +215,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         // show final score, etc.
         // TODO: 17/10/2017 change the layout of result: score, correct num
-        show_result.setText(scoreTotal);
+        show_result.setText(String.valueOf(scoreTotal));
         // btn: finish->go back to main activity;
         btn_tryAnother.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,5 +236,67 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 QuizActivity.this.recreate();
             }
         });
+    }
+
+    public List<Question> getAllQuestions() {
+
+        Cursor c = cr.query(QuestionProvider.CONTENT_URI, DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS, null, null, "RANDOM() LIMIT 5");
+        List<Question> questions = new ArrayList<>();
+        // looping through all rows and adding to list
+        if(c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    Question q = new Question();
+                    q.setQuestionID(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.KEY_QUESTION_ID)));
+                    q.setContent(c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_CONTENT)));
+                    q.setCategory(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_CATEGORY)));
+                    q.setDifficulty(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_DIFFICULTY)));
+                    q.setTrueAnswer(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_TRUE_ANSWER)));
+
+                    String[] options = new String[4];
+                    options[0] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_1));
+                    options[1] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_2));
+                    options[2] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_3));
+                    options[3] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_4));
+                    q.setAnswerOptions(options);
+                    // adding to the list
+                    questions.add(q);
+                } while (c.moveToNext());
+            }
+        }
+        c.close();
+        return questions;
+    }
+
+    public List<Question> getQuestionsByCategory(int category) {
+        List<Question> questions = new ArrayList<>();
+
+        String selection = DatabaseContract.QuestionEntry.QUESTION_CATEGORY + "=" + category;
+        Cursor c = cr.query(QuestionProvider.CONTENT_URI, DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS, selection, null, "RANDOM() LIMIT 5");
+
+        // looping through all rows and adding to list
+        if(c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    Question q = new Question();
+                    q.setQuestionID(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.KEY_QUESTION_ID)));
+                    q.setContent(c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_CONTENT)));
+                    q.setCategory(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_CATEGORY)));
+                    q.setDifficulty(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_DIFFICULTY)));
+                    q.setTrueAnswer(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_TRUE_ANSWER)));
+
+                    String[] options = new String[4];
+                    options[0] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_1));
+                    options[1] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_2));
+                    options[2] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_3));
+                    options[3] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_4));
+                    q.setAnswerOptions(options);
+                    // adding to the list
+                    questions.add(q);
+                } while (c.moveToNext());
+            }
+        }
+        c.close();
+        return questions;
     }
 }

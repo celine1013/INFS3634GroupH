@@ -26,6 +26,8 @@ public class Question {
     public static final int CATE_O6_INTENT = 6;
     public static final int CATE_O7_DATABASE = 7;
 
+    public static final int CATE_RANDOM = 0;
+
     //empty constructor
     public Question() {
     }
