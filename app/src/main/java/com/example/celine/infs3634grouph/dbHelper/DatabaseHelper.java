@@ -59,12 +59,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_QUESTION);
         // TODO: 12/10/2017 preload data here
         Log.d("DATABASE SETTING", "TABLE CREATION COMPLETED");
+        // General Questions
         String[] options1 = {"ViewGroup","Display", "Activity","None of the above"};
         Question q = new Question(1,"What is the name of the class which is inherited to create a user view ?",
                 Question.EASY,Question.CATE_O1_GENERAL,options1,3);
         createQuestion(q);
 
-        // TODO: 17/10/2017 fill in below and create more;
         String[] options2 = {"Application","Manifest","Activity","Action"};
         q = new Question(2, "The root element of AndroidManifest.xml is:",
                 Question.EASY,Question.CATE_O1_GENERAL,options2,2);
@@ -110,6 +110,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Question.HARD,Question.CATE_O1_GENERAL,options10,1);
         createQuestion(q);
 
+        
 
     }
 
