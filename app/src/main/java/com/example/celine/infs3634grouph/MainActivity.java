@@ -1,6 +1,11 @@
 package com.example.celine.infs3634grouph;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +15,9 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.celine.infs3634grouph.dbHelper.DatabaseContract;
 import com.example.celine.infs3634grouph.dbHelper.DatabaseHelper;
+import com.example.celine.infs3634grouph.dbHelper.QuestionProvider;
 import com.example.celine.infs3634grouph.model.Question;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -45,40 +52,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_database;
 
     public static final String TAG_CATEGORY = "category";
+    private ContentResolver cr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //set up database
-        db = new DatabaseHelper(getApplicationContext());
-
-        //for testing convenience: will clean up all data and re-load when restart the app
-        db.cleanDatabase();
-        Log.d("SETTING DATABASE", "Database rebuilt");
-
-        //import sample data
-        // TODO: 25/09/2017 add data into database
-        List<Question> questions = new ArrayList<>();
-        /*String[] str = getResources().getStringArray(R.array.questions);
-        for(int i = 0; i < MAX_QUESTION; i++){
-            Question q = new Question();
-            if(i < MAX_CAT1){
-                q = new Question(str[i], R.string.category_01, 1, );
-            }else if(i<MAX_CAT2){
-               q = new Question(str[i], R.string.category_02, 1);
-            }else if(i<MAX_CAT3){
-                q = new Question(str[i], R.string.category_03, 1);
-            }else if(i<MAX_CAT4){
-                q = new Question(str[i], R.string.category_04, 1);
-            }else if(i<MAX_CAT5){
-                q = new Question(str[i], R.string.category_05, 1);
-            }
-            questions.add(q);
-        }*/
-
-        Log.v("SETTING DATABASE", "Data loading completed");
 
         // TODO: 7/10/2017 complete binding
         btn_quickStart = (Button)findViewById(R.id.quickStartBtn);
@@ -134,5 +113,85 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
         startActivity(intent);
+    }
+
+    //CRUD
+    public Uri createQuestion(Question question) {
+
+        ContentValues values = new ContentValues();
+
+        values.put(DatabaseContract.QuestionEntry.KEY_QUESTION_ID, question.getQuestionID());
+        values.put(DatabaseContract.QuestionEntry.QUESTION_CONTENT, question.getContent());
+        values.put(DatabaseContract.QuestionEntry.QUESTION_CATEGORY, question.getCategory());
+        values.put(DatabaseContract.QuestionEntry.QUESTION_DIFFICULTY, question.getDifficulty());
+        values.put(DatabaseContract.QuestionEntry.QUESTION_TRUE_ANSWER, question.getTrueAnswer());
+        String[] options = question.getAnswerOptions();
+        if(options.length == 4) {
+            values.put(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_1, options[0]);
+            values.put(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_2, options[1]);
+            values.put(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_3, options[2]);
+            values.put(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_4, options[3]);
+        }
+
+        // insert row
+        Uri id = cr.insert(QuestionProvider.CONTENT_URI,values);
+
+        return id;
+    }
+
+    private void setDatabase(){
+        //set up database
+        db = new DatabaseHelper(getApplicationContext());
+        db.cleanDatabase();
+        cr = getContentResolver();
+        String[] options1 = {"ViewGroup","Display", "Activity","None of the above"};
+        Question q = new Question(1,"What is the name of the class which is inherited to create a user view ?",
+                Question.EASY,Question.CATE_O1_GENERAL,options1,3);
+        Log.d("DATABASE TESTING", createQuestion(q).toString());
+
+        String[] options2 = {"Application","Manifest","Activity","Action"};
+        q = new Question(2, "The root element of AndroidManifest.xml is:",
+                Question.EASY,Question.CATE_O1_GENERAL,options2,2);
+        createQuestion(q);
+
+        String[] options3 = {"/assets","/src","/res/values","/res/layout"};
+        q = new Question(3, "In which directory are the XML layout files stored in an android application:",
+                Question.EASY,Question.CATE_O1_GENERAL,options3,4);
+        createQuestion(q);
+
+        String[] options4 = {"Relative Layout","Frame Layout","Linear Layout","Grid Layout"};
+        q = new Question(4, "Name the layout where the positions of the children can be described in relation to each other or the parent:",
+                Question.MED,Question.CATE_O1_GENERAL,options4,1);
+        createQuestion(q);
+
+        String[] options5 = {"onCreate()","findViewById()","setContentView","None of the above"};
+        q = new Question(5, "Select the method used to access a view element of a layout resource in an activity:",
+                Question.MED,Question.CATE_O1_GENERAL,options5,2);
+        createQuestion(q);
+
+        String[] options6 = {"R.style","X.style","Manifest.XML","Application"};
+        q = new Question(6, "Android provides a few standard themes, listed in__________?",
+                Question.HARD,Question.CATE_O1_GENERAL,options6,1);
+        createQuestion(q);
+
+        String[] options7 = {"Resources","Dalvik Executable","Both a and b","None of above\n"};
+        q = new Question(7, "Which of the following(s) is/are component of APK file?",
+                Question.HARD,Question.CATE_O1_GENERAL,options7,3);
+        createQuestion(q);
+
+        String[] options8 = {"Desktop Operating System","Programming Language","Mobile Operating System","Database"};
+        q = new Question(8, "What is android?",
+                Question.EASY,Question.CATE_O1_GENERAL,options8,3);
+        createQuestion(q);
+
+        String[] options9 = {"HTC Hero","Google gPhone","T-Mobile G1","Motorola Droid"};
+        q = new Question(9, "What was the first phone released that ran the Android OS?",
+                Question.EASY,Question.CATE_O1_GENERAL,options9,3);
+        createQuestion(q);
+
+        String[] options10 = {"Only Radio interface layer and alarm are in active mode","Switched off","Airplane mode","None of the Above"};
+        q = new Question(10, "What is sleep mode in android?",
+                Question.HARD,Question.CATE_O1_GENERAL,options10,1);
+        createQuestion(q);
     }
 }

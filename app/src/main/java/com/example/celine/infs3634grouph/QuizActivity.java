@@ -1,5 +1,6 @@
 package com.example.celine.infs3634grouph;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
+
+import com.example.celine.infs3634grouph.dbHelper.DatabaseContract;
 import com.example.celine.infs3634grouph.dbHelper.DatabaseHelper;
 import com.example.celine.infs3634grouph.dbHelper.QuestionProvider;
 import com.example.celine.infs3634grouph.model.Question;
@@ -46,6 +50,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private int scoreTotal = 0;
     private int curSocre = 10;
     private Question q;
+    private ContentResolver cr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +78,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         // show category
         show_category.setText(getResources().getString(category));
         db = new DatabaseHelper(this);
-        final List<Question> questions = db.getQuestionsByCategory(category);
+        final List<Question> questions = getQuestionsByCategory(category);
         
 
         // calculate score, change the text field
@@ -217,5 +222,67 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 QuizActivity.this.recreate();
             }
         });
+    }
+
+    public List<Question> getAllQuestions() {
+
+        Cursor c = cr.query(QuestionProvider.CONTENT_URI, null, null, null, null);
+        List<Question> questions = new ArrayList<>();
+        // looping through all rows and adding to list
+        if(c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    Question q = new Question();
+                    q.setQuestionID(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.KEY_QUESTION_ID)));
+                    q.setContent(c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_CONTENT)));
+                    q.setCategory(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_CATEGORY)));
+                    q.setDifficulty(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_DIFFICULTY)));
+                    q.setTrueAnswer(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_TRUE_ANSWER)));
+
+                    String[] options = new String[4];
+                    options[0] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_1));
+                    options[1] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_2));
+                    options[2] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_3));
+                    options[3] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_4));
+                    q.setAnswerOptions(options);
+                    // adding to the list
+                    questions.add(q);
+                } while (c.moveToNext());
+            }
+        }
+        c.close();
+        return questions;
+    }
+
+    public List<Question> getQuestionsByCategory(int category) {
+        List<Question> questions = new ArrayList<>();
+
+        String selection = DatabaseContract.QuestionEntry.QUESTION_CATEGORY + "=" + category;
+        Cursor c = cr.query(QuestionProvider.CONTENT_URI, null, selection, null, null);
+
+        // looping through all rows and adding to list
+        if(c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    Question q = new Question();
+                    q.setQuestionID(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.KEY_QUESTION_ID)));
+                    q.setContent(c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_CONTENT)));
+                    q.setCategory(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_CATEGORY)));
+                    q.setDifficulty(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_DIFFICULTY)));
+                    q.setTrueAnswer(c.getInt(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_TRUE_ANSWER)));
+
+                    String[] options = new String[4];
+                    options[0] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_1));
+                    options[1] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_2));
+                    options[2] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_3));
+                    options[3] = c.getString(c.getColumnIndex(DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_4));
+                    q.setAnswerOptions(options);
+                    // adding to the list
+                    questions.add(q);
+                } while (c.moveToNext());
+            }
+        }
+        c.close();
+        return questions;
     }
 }
