@@ -193,10 +193,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerC.setText(options[2]);
         btn_answerD.setText(options[3]);
 
-        btn_answerA.setBackgroundColor(getColor(R.color.colorBlueness));
-        btn_answerB.setBackgroundColor(getColor(R.color.colorBlueness));
-        btn_answerC.setBackgroundColor(getColor(R.color.colorBlueness));
-        btn_answerD.setBackgroundColor(getColor(R.color.colorBlueness));
+        btn_answerA.setBackgroundColor(getColor(R.color.colorBlack));
+        btn_answerB.setBackgroundColor(getColor(R.color.colorBlack));
+        btn_answerC.setBackgroundColor(getColor(R.color.colorBlack));
+        btn_answerD.setBackgroundColor(getColor(R.color.colorBlack));
     }
     
     private void showresult(){

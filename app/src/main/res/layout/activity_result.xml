@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@color/colorUNSWYellow"
     android:padding="10dp">
     
     <TextView
@@ -11,6 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="70dp"
+        android:fontFamily="casual"
         android:textColor="@color/colorBlack"
         android:paddingTop="40dp"
         android:paddingBottom="40dp"
@@ -22,6 +24,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="50dp"
+        android:fontFamily="casual"
         android:paddingTop="30dp"
         android:textColor="@color/colorBlack" />
 
@@ -30,26 +33,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingBottom="100dp"
+        android:paddingBottom="30dp"
+        android:fontFamily="casual"
         android:text="Score"
         android:textColor="@color/colorBlack"
         android:textSize="50dp" />
 
     <Button
         android:id="@+id/btnTryAgain"
-        android:text="@string/tryAgain"
-        android:textSize="20dp"
-        android:padding="20dp"
-        android:backgroundTint="@color/colorGreen"
-        android:textColor="@color/colorWhite"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorBlack"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:padding="20dp"
+        android:text="@string/tryAgain"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/btnTryAnother"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorGreen"
+        android:backgroundTint="@color/colorBlack"
+        android:fontFamily="casual"
+        android:textStyle="bold"
         android:padding="20dp"
         android:text="@string/finish"
         android:textColor="@color/colorWhite"

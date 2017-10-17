@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top"
+    android:background="@color/colorUNSWYellow"
     tools:context="com.example.celine.infs3634grouph.QuizActivity">
 
     <ScrollView
@@ -24,6 +25,7 @@
                 android:id="@+id/textViewCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="casual"
                 android:textSize="30dp"
                 android:padding="10dp"
                 android:textColor="@color/colorBlack"
@@ -43,23 +45,27 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:fontFamily="casual"
+                    android:text="Question Number："
+                    android:textStyle="bold"
                     android:textColor="@color/colorBlack"
-                    android:text="Question Number：" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/questionNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorBlack"
+                    android:fontFamily="casual"
                     android:textSize="30dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="40dp" />
+                    android:paddingRight="50dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:fontFamily="casual"
                     android:textSize="15dp"
                     android:text="Your Score："
                     />
@@ -69,8 +75,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="30dp"
+                    android:fontFamily="casual"
                     android:textColor="@color/colorBlack"
-                    android:paddingLeft="50dp"/>
+                    android:paddingLeft="20dp"
+                    android:paddingRight="50dp"/>
 
             </LinearLayout>
 
@@ -83,12 +91,11 @@
                 android:id="@+id/question_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:textSize="25dp"
+                android:fontFamily="casual"
+                android:paddingBottom="30dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:paddingTop="30dp"
-                android:paddingBottom="30dp"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
         </LinearLayout>
 
@@ -101,37 +108,49 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnAnswerB"
-        android:layout_marginBottom="10dp"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorWhite" />
 
     <Button
         android:id="@+id/btnAnswerB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_above="@+id/btnAnswerC"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorWhite" />
 
     <Button
         android:id="@+id/btnAnswerC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_above="@+id/btnAnswerD"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorWhite" />
 
     <Button
         android:id="@+id/btnAnswerD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_above="@+id/nextQuestion"
@@ -141,13 +160,15 @@
         android:id="@+id/nextQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBlue"
-        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:background="@color/colorGray"
         android:text="NEXT QUESTION"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorWhite" />
 
 
 </RelativeLayout>

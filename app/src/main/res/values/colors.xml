@@ -12,4 +12,6 @@
     <color name="colorBlue">#20a6ff</color>
     <color name="colorBlack">#000000</color>
     <color name="colorViolet">#cd5aff</color>
+    <color name="colorUNSWYellow">#ffcc00</color>
+    <color name="colorGray">#898885</color>
 </resources>
