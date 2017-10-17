@@ -149,9 +149,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             correctNum++;
             scoreTotal += curSocre;
             correctButton = currentCorrect;
-            Toast.makeText(QuizActivity.this, getResources().getString(R.string.correct_notification), Toast.LENGTH_SHORT);
+            Toast.makeText(QuizActivity.this, getResources().getString(R.string.correct_notification), Toast.LENGTH_LONG);
         }else{
-            Toast.makeText(QuizActivity.this, getResources().getString(R.string.incorrect_notification), Toast.LENGTH_SHORT);
+            Toast.makeText(QuizActivity.this, getResources().getString(R.string.incorrect_notification), Toast.LENGTH_LONG);
         }
         //show true answer no matter whether the user answer correctly
         //true answer btn's background color turns green, others turn green
@@ -215,7 +215,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         // show final score, etc.
         // TODO: 17/10/2017 change the layout of result: score, correct num
-        show_result.setText(scoreTotal);
+        show_result.setText(String.valueOf(scoreTotal));
         // btn: finish->go back to main activity;
         btn_tryAnother.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,7 +240,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     public List<Question> getAllQuestions() {
 
-        Cursor c = cr.query(QuestionProvider.CONTENT_URI, null, null, null, null);
+        Cursor c = cr.query(QuestionProvider.CONTENT_URI, DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS, null, null, "RANDOM() LIMIT 5");
         List<Question> questions = new ArrayList<>();
         // looping through all rows and adding to list
         if(c != null) {
