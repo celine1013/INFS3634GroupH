@@ -20,4 +20,7 @@
     <string-array name="questions">
         <item></item>
     </string-array>
+
+    <string name="correct_notification">You are absolutely right ! :)</string>
+    <string name="incorrect_notification">Study harder! :(</string>
 </resources>
