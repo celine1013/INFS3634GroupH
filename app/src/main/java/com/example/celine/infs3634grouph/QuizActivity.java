@@ -1,8 +1,12 @@
 package com.example.celine.infs3634grouph;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.MediaPlayer;
+import android.os.AsyncTask;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +45,11 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_tryAnother;
     private TextView show_correctNum;
 
+    private Vibrator vibrator;
+    private MediaPlayer mp;
+    private BackgroundSound bgm;
+
+
     //declare
     private static final int MAX_QUESTION_NUM = 10;
     private int correctNum;
@@ -71,7 +80,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         next_question = (Button) findViewById(R.id.nextQuestion);
 
         cr = getContentResolver();
-
+        vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
         // specify a number of random questions within the specific category
         int category_str = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY_SHOW, -1);//get category from intent
         //catch unknown error
@@ -116,11 +125,35 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        bgm = (BackgroundSound)new BackgroundSound().execute();
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        mp.stop();
+        bgm.cancel(true);
+    }
+    public class BackgroundSound extends AsyncTask<Void, Void, Void> {
 
+        @Override
+        protected Void doInBackground(Void... params) {
+            mp = MediaPlayer.create(QuizActivity.this, R.raw.numb);
+            mp.setLooping(true); // Set looping
+            mp.setVolume(1.0f, 1.0f);
+            mp.start();
 
+            return null;
+        }
 
+        @Override
+        protected void onCancelled() {
+            mp.stop();
+        }
 
-        
     }
 
     @Override
@@ -149,9 +182,11 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             correctNum++;
             scoreTotal += curSocre;
             correctButton = currentCorrect;
-            Toast.makeText(QuizActivity.this, getResources().getString(R.string.correct_notification), Toast.LENGTH_LONG);
+
+            //Toast.makeText(QuizActivity.this, getResources().getString(R.string.correct_notification), Toast.LENGTH_LONG).show();
         }else{
-            Toast.makeText(QuizActivity.this, getResources().getString(R.string.incorrect_notification), Toast.LENGTH_LONG);
+            vibrator.vibrate(600);
+            //Toast.makeText(QuizActivity.this, getResources().getString(R.string.incorrect_notification), Toast.LENGTH_LONG).show();
         }
         //show true answer no matter whether the user answer correctly
         //true answer btn's background color turns green, others turn green

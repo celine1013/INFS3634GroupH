@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.celine.infs3634grouph">
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -18,10 +19,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".QuizActivity"></activity>
+
         <provider
         android:authorities ="com.example.celine.infs3634grouph.questionprovider"
         android:name = "com.example.celine.infs3634grouph.dbHelper.QuestionProvider"
         android:exported="false"/>
+
+
     </application>
 
 </manifest>

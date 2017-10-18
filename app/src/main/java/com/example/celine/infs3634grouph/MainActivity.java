@@ -5,7 +5,9 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String TAG_CATEGORY_DATA = "category_dat";
     private ContentResolver cr;
 
+    public MediaPlayer mp;
+    private BackgroundSound bgm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +84,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_intent.setOnClickListener(this);
         btn_database.setOnClickListener(this);
 
+        /*mp = MediaPlayer.create(MainActivity.this, R.raw.bgm01);
+        mp.setLooping(true); // Set looping
+        mp.setVolume(1.0f, 1.0f);
+        mp.start();*/
+
+
+
+
+
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        bgm = (BackgroundSound)new BackgroundSound().execute();
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        mp.stop();
+        bgm.cancel(true);
+    }
+    @Override
+    public void onStop(){
+        super.onStop();
+    }
+
     // TODO: 7/10/2017 complete onclick
     @Override
     public void onClick(View view) {
@@ -148,6 +178,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return id;
     }
 
+    public class BackgroundSound extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mp = MediaPlayer.create(MainActivity.this, R.raw.bgm01);
+            mp.setLooping(true); // Set looping
+            mp.setVolume(1.0f, 1.0f);
+            mp.start();
+
+            return null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            mp.stop();
+        }
+
+    }
     private void setDatabase(){
         //set up database
         db = new DatabaseHelper(getApplicationContext());
