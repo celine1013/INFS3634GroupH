@@ -71,6 +71,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressBar pb_countDown;
     private CountDownTimer countDownTimer_showAnswer;
 
+    private static final int SP_FAST = 5000;
+    private static final int SP_MED = 10000;
+    private static final int SP_SLOW = 15000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,8 +112,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         // calculate score, change the text field
         show_score.setText(String.valueOf(scoreTotal));
-        showQuestion();
-
         btn_answerA.setOnClickListener(this);
         btn_answerB.setOnClickListener(this);
         btn_answerC.setOnClickListener(this);
@@ -133,17 +134,31 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             }
         });*/
         showQuestion();
-        countDownTimer_showAnswer = new CountDownTimer(time, 250) {
+        int speed = getIntent().getIntExtra(MainActivity.TAG_SPEED, -1);
+        switch (speed){
+            case MainActivity.SPEED_FAST:
+                time = SP_FAST;
+                break;
+            case MainActivity.SPEED_MEDIUM:
+                time = SP_MED;
+                break;
+            case MainActivity.SPEED_SLOW:
+                time = SP_SLOW;
+                break;
+        }
+        countDownTimer_showAnswer = new CountDownTimer(time, 100) {
             @Override
             public void onTick(long l) {
-                pb_countDown.setProgress((int)(time-l));
+
+                pb_countDown.setProgress((int)progress*100/(time/100));
+                progress++;
             }
 
             @Override
             public void onFinish() {
                 pb_countDown.setProgress(0);
                 progress = 0;
-                if (currentNum < questions_l.size()) {
+                if (currentNum< questions_l.size()) {
                     showQuestion();
                     this.start();
                 } else {
@@ -245,7 +260,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerD.setClickable(false);
         Button btn_choose = (Button) findViewById(correctButton);
         btn_choose.setBackgroundColor(getColor(R.color.colorGreen));
-        CountDownTimer ct = new CountDownTimer(3000, 250) {
+        CountDownTimer ct = new CountDownTimer(1500, 250) {
             @Override
             public void onTick(long l) {
 
@@ -267,7 +282,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         q = questions_l.get(currentNum);
         currentCorrect = q.getTrueAnswer();
         // show question number
-        show_questionNumber.setText(String.valueOf(currentNum + 1));
+        show_questionNumber.setText(String.valueOf(currentNum+ 1 ));
         // get questions using category data sent by main activity
         show_question.setText(q.getContent());
 
@@ -326,8 +341,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public List<Question> getAllQuestions() {
-
-        Cursor c = cr.query(QuestionProvider.CONTENT_URI, DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS, null, null, "RANDOM()");
+        int diff = getIntent().getIntExtra(MainActivity.TAG_DIFF, -1);
+        String selection = DatabaseContract.QuestionEntry.QUESTION_DIFFICULTY + " = " + diff;
+        Cursor c = cr.query(QuestionProvider.CONTENT_URI, DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS, selection, null, "RANDOM()");
         List<Question> questions = new ArrayList<>();
         // looping through all rows and adding to list
         if(c != null) {
@@ -357,8 +373,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     public List<Question> getQuestionsByCategory(int category) {
         List<Question> questions = new ArrayList<>();
-
-        String selection = DatabaseContract.QuestionEntry.QUESTION_CATEGORY + "=" + category;
+        int difficulty = getIntent().getIntExtra(MainActivity.TAG_DIFF,-1);
+        String str1 = DatabaseContract.QuestionEntry.QUESTION_DIFFICULTY + " = " + difficulty;
+        String str2 = DatabaseContract.QuestionEntry.QUESTION_CATEGORY + " = " + category;
+        String selection = str1 + " AND " + str2;
         Cursor c = cr.query(QuestionProvider.CONTENT_URI, DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS, selection, null, "RANDOM() LIMIT 5");
 
         // looping through all rows and adding to list

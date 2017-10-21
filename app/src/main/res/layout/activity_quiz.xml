@@ -148,23 +148,21 @@
         android:id="@+id/btnAnswerD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="casual"
-        android:textStyle="bold"
-        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_above="@+id/progressBar_countDown"
-        />
+        android:fontFamily="casual"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
 
     <ProgressBar
         android:id="@+id/progressBar_countDown"
-        style="@android:style/Widget.Material.Light.ProgressBar.Horizontal"
+        style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:progressTintMode="multiply" />
+        android:layout_above="@+id/btnAnswerA" />
 
 
 </RelativeLayout>

@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">MyQuiz</string>
-
-
+    
     <string name="category_random">Random</string>
     <string name="category_01">General</string>
     <string name="category_02">Fundamentals</string>
@@ -17,11 +16,23 @@
 
     <string name="showResult">Result</string>
     <string name="text_ok">OK</string>
-    <string name="text_cancel">Cencel</string>
+    <string name="text_cancel">Cancel</string>
     <string name="correct_notification">You are absolutely right ! :)</string>
     <string name="incorrect_notification">Study harder! :(</string>
     <string name="text_quickStart">QUICK START</string>
     <string name="text_speed">Speed</string>
     <string name="text_diff">Difficulty</string>
     <string name="text_num_question">Number of Question</string>
+
+    <string-array name="arr_speed">
+        <item>Slow</item>
+        <item>Medium</item>
+        <item>Fast</item>
+    </string-array>
+
+    <string-array name="arr_difficulty">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
 </resources>

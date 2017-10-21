@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -23,7 +24,7 @@ import com.example.celine.infs3634grouph.dbHelper.DatabaseHelper;
 import com.example.celine.infs3634grouph.dbHelper.QuestionProvider;
 import com.example.celine.infs3634grouph.model.Question;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements CustomDialogFragment.NoticeDialogListener, View.OnClickListener {
 
     DatabaseHelper db;
     private static final int MAX_QUESTION = 50;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int MAX_CAT3 = 30;
     private static final int MAX_CAT4 = 40;
     private static final int MAX_CAT5 = 50;
+
+    public static final String TAG_DIFF = "tag_diff";
 
     //declare integer used in building intents
     public static final int CATEGORY_RANDOM = R.string.category_random;
@@ -42,6 +45,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final int CATEGORY_05 = R.string.category_05;
     public static final int CATEGORY_06 = R.string.category_06;
     public static final int CATEGORY_07 = R.string.category_07;
+
+    private int speed;
+    public static final String TAG_SPEED = "tag_speed";
+    public static final int SPEED_SLOW = 0;
+    public static final int SPEED_MEDIUM = 1;
+    public static final int SPEED_FAST = 2;
+
+    private int difficulty;
 
     //declare all widgets
     private Button btn_quickStart;
@@ -59,12 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public MediaPlayer mp;
     private BackgroundSound bgm;
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
         setDatabase();
-        // TODO: 7/10/2017 complete binding
+        intent = new Intent(MainActivity.this, QuizActivity.class);
+
         btn_quickStart = (Button) findViewById(R.id.quickStartBtn);
         btn_general = (CardView)findViewById(R.id.btn_general);
         btn_fundamentals = (CardView)findViewById(R.id.btn_fundamental);
@@ -74,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_intent = (CardView)findViewById(R.id.btn_intents);
         btn_database = (CardView)findViewById(R.id.btn_database);
 
-        // TODO: 7/10/2017 complete setting onclickListener
+
         btn_quickStart.setOnClickListener(this);
         btn_general.setOnClickListener(this);
         btn_fundamentals.setOnClickListener(this);
@@ -88,10 +101,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mp.setLooping(true); // Set looping
         mp.setVolume(1.0f, 1.0f);
         mp.start();*/
-
-
-
-
 
     }
 
@@ -114,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // TODO: 7/10/2017 complete onclick
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(MainActivity.this, QuizActivity.class);
+
         switch (view.getId()) {
 
             //send info of diff categories to quiz activities;
@@ -151,9 +160,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_RANDOM);
                 break;
         }
+        CustomDialogFragment dialog = new CustomDialogFragment();
+        dialog.show(getSupportFragmentManager(),"CUSTOM QUIZ FRAGMENT");
+    }
+    @Override
+    public void onDialogPositiveClick(CustomDialogFragment dialog) {
+        speed = dialog.sp_speed.getSelectedItemPosition();
+        difficulty = dialog.sp_diff.getSelectedItemPosition();
+        intent.putExtra(TAG_SPEED, speed);
+        intent.putExtra(TAG_DIFF, difficulty);
         startActivity(intent);
     }
 
+    @Override
+    public void onDialogNegativeClick(CustomDialogFragment dialog) {
+        dialog.getDialog().cancel();
+    }
+
+    public class BackgroundSound extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mp = MediaPlayer.create(MainActivity.this, R.raw.bgm01);
+            mp.setLooping(true); // Set looping
+            mp.setVolume(1.0f, 1.0f);
+            mp.start();
+
+            return null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            mp.stop();
+        }
+
+    }
     //CRUD
     public Uri createQuestion(Question question) {
 
@@ -178,24 +219,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return id;
     }
 
-    public class BackgroundSound extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            mp = MediaPlayer.create(MainActivity.this, R.raw.bgm01);
-            mp.setLooping(true); // Set looping
-            mp.setVolume(1.0f, 1.0f);
-            mp.start();
-
-            return null;
-        }
-
-        @Override
-        protected void onCancelled() {
-            mp.stop();
-        }
-
-    }
     private void setDatabase(){
         //set up database
         db = new DatabaseHelper(getApplicationContext());
