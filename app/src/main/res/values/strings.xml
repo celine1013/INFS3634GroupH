@@ -16,12 +16,12 @@
     <string name="finish">Finish</string>
 
     <string name="showResult">Result</string>
-
-    <string-array name="questions">
-        <item></item>
-    </string-array>
-
+    <string name="text_ok">OK</string>
+    <string name="text_cancel">Cencel</string>
     <string name="correct_notification">You are absolutely right ! :)</string>
     <string name="incorrect_notification">Study harder! :(</string>
     <string name="text_quickStart">QUICK START</string>
+    <string name="text_speed">Speed</string>
+    <string name="text_diff">Difficulty</string>
+    <string name="text_num_question">Number of Question</string>
 </resources>

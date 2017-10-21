@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,8 @@ import com.example.celine.infs3634grouph.dbHelper.DatabaseContract;
 import com.example.celine.infs3634grouph.dbHelper.DatabaseHelper;
 import com.example.celine.infs3634grouph.dbHelper.QuestionProvider;
 import com.example.celine.infs3634grouph.model.Question;
+
+import static java.lang.Math.*;
 
 
 public class QuizActivity extends AppCompatActivity implements View.OnClickListener{
@@ -61,30 +65,34 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private int curSocre = 20;
     private Question q;
     private ContentResolver cr;
+    private int progress = 0;
+    private int time = 10000;
 
-
+    private ProgressBar pb_countDown;
+    private CountDownTimer countDownTimer_showAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         // binding
-        show_category = (TextView)findViewById(R.id.textViewCategory);
-        show_questionNumber = (TextView)findViewById(R.id.questionNum);
-        show_score = (TextView)findViewById(R.id.textViewScore);
-        show_question = (TextView)findViewById(R.id.question_text_view);
-        btn_answerA = (Button)findViewById(R.id.btnAnswerA);
-        btn_answerB = (Button)findViewById(R.id.btnAnswerB);
-        btn_answerC = (Button)findViewById(R.id.btnAnswerC);
-        btn_answerD = (Button)findViewById(R.id.btnAnswerD);
-        next_question = (Button) findViewById(R.id.nextQuestion);
+        show_category = (TextView) findViewById(R.id.textViewCategory);
+        show_questionNumber = (TextView) findViewById(R.id.questionNum);
+        show_score = (TextView) findViewById(R.id.textViewScore);
+        show_question = (TextView) findViewById(R.id.question_text_view);
+        btn_answerA = (Button) findViewById(R.id.btnAnswerA);
+        btn_answerB = (Button) findViewById(R.id.btnAnswerB);
+        btn_answerC = (Button) findViewById(R.id.btnAnswerC);
+        btn_answerD = (Button) findViewById(R.id.btnAnswerD);
+
+        pb_countDown = findViewById(R.id.progressBar_countDown);
 
         cr = getContentResolver();
-        vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         // specify a number of random questions within the specific category
         int category_str = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY_SHOW, -1);//get category from intent
         //catch unknown error
-        if(category_str == -1){
+        if (category_str == -1) {
             Log.e("QUIZ ACTIVITY", "NO CATEGORY RECEIVED, ACTIVITY FINISHED");
             finish();
         }
@@ -92,13 +100,12 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         show_category.setText(getResources().getString(category_str));
 
         int category_dat = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY_DATA, -1);
-        if(category_dat == Question.CATE_RANDOM){
+        if (category_dat == Question.CATE_RANDOM) {
             questions_l = getAllQuestions();
-        }else{
+        } else {
             questions_l = getQuestionsByCategory(category_dat);
         }
 
-        
 
         // calculate score, change the text field
         show_score.setText(String.valueOf(scoreTotal));
@@ -109,7 +116,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerC.setOnClickListener(this);
         btn_answerD.setOnClickListener(this);
 
-        next_question.setOnClickListener(new View.OnClickListener() {
+        /*next_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -124,7 +131,30 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                     showresult();
                 }
             }
-        });
+        });*/
+        showQuestion();
+        countDownTimer_showAnswer = new CountDownTimer(time, 250) {
+            @Override
+            public void onTick(long l) {
+                pb_countDown.setProgress((int)(time-l));
+            }
+
+            @Override
+            public void onFinish() {
+                pb_countDown.setProgress(0);
+                progress = 0;
+                if (currentNum < questions_l.size()) {
+                    showQuestion();
+                    this.start();
+                } else {
+                    currentNum = 0;
+                    showresult();
+                }
+            }
+        };
+        countDownTimer_showAnswer.start();
+
+
     }
     @Override
     public void onResume(){
@@ -143,7 +173,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         protected Void doInBackground(Void... params) {
             mp = MediaPlayer.create(QuizActivity.this, R.raw.numb);
             mp.setLooping(true); // Set looping
-            mp.setVolume(1.0f, 1.0f);
+            mp.setVolume(2.0f, 2.0f);
             mp.start();
 
             return null;
@@ -175,23 +205,23 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 answerChose = 4;
                 break;
         }
-        // 7/10/2017 veryfy if answer chose match currentAnswer
+        // 7/10/2017 verify if answer chose match currentAnswer
         //if matched, currentCorrect increase, show correct notification, score changed
         //if mismatched, show incorrect notification
-        if(answerChose == currentCorrect){
+        if (answerChose == currentCorrect) {
             correctNum++;
             scoreTotal += curSocre;
             correctButton = currentCorrect;
 
             //Toast.makeText(QuizActivity.this, getResources().getString(R.string.correct_notification), Toast.LENGTH_LONG).show();
-        }else{
+        } else {
             vibrator.vibrate(600);
             //Toast.makeText(QuizActivity.this, getResources().getString(R.string.incorrect_notification), Toast.LENGTH_LONG).show();
         }
         //show true answer no matter whether the user answer correctly
         //true answer btn's background color turns green, others turn green
         //score change
-        switch (currentCorrect){
+        switch (currentCorrect) {
             case 1:
                 correctButton = R.id.btnAnswerA;
                 break;
@@ -209,8 +239,23 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerB.setBackgroundColor(getColor(R.color.colorRed));
         btn_answerC.setBackgroundColor(getColor(R.color.colorRed));
         btn_answerD.setBackgroundColor(getColor(R.color.colorRed));
-        Button btn_choose = (Button)findViewById(correctButton);
+        btn_answerA.setClickable(false);
+        btn_answerB.setClickable(false);
+        btn_answerC.setClickable(false);
+        btn_answerD.setClickable(false);
+        Button btn_choose = (Button) findViewById(correctButton);
         btn_choose.setBackgroundColor(getColor(R.color.colorGreen));
+        CountDownTimer ct = new CountDownTimer(3000, 250) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                countDownTimer_showAnswer.onFinish();
+            }
+        }.start();
 
     }
 
@@ -218,6 +263,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private void showQuestion(){
         // show the first question and answer options
         //maxQuestionNum = questions.size();
+        show_score.setText(String.valueOf(scoreTotal));
         q = questions_l.get(currentNum);
         currentCorrect = q.getTrueAnswer();
         // show question number
@@ -236,6 +282,12 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerB.setBackgroundColor(getColor(R.color.colorBlack));
         btn_answerC.setBackgroundColor(getColor(R.color.colorBlack));
         btn_answerD.setBackgroundColor(getColor(R.color.colorBlack));
+        btn_answerA.setClickable(true);
+        btn_answerB.setClickable(true);
+        btn_answerC.setClickable(true);
+        btn_answerD.setClickable(true);
+
+        currentNum++;
     }
     
     private void showresult(){
@@ -275,7 +327,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     public List<Question> getAllQuestions() {
 
-        Cursor c = cr.query(QuestionProvider.CONTENT_URI, DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS, null, null, "RANDOM() LIMIT 5");
+        Cursor c = cr.query(QuestionProvider.CONTENT_URI, DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS, null, null, "RANDOM()");
         List<Question> questions = new ArrayList<>();
         // looping through all rows and adding to list
         if(c != null) {

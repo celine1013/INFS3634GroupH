@@ -3,4 +3,6 @@
     <dimen name="margin_card_text">32dp</dimen>
     <dimen name="margin_hor">16dp</dimen>
     <dimen name="card_ele">8dp</dimen>
+    <dimen name="margin_ver">16dp</dimen>
+    <dimen name="text_pad">8dp</dimen>
 </resources>
