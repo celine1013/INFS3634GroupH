@@ -67,6 +67,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private ContentResolver cr;
     private int progress = 0;
     private int time = 10000;
+    private int category_dat;
+    private boolean isCorrect = true;
 
     private ProgressBar pb_countDown;
     private CountDownTimer countDownTimer_showAnswer;
@@ -102,7 +104,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         // show category
         show_category.setText(getResources().getString(category_str));
 
-        int category_dat = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY_DATA, -1);
+        category_dat = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY_DATA, -1);
         if (category_dat == Question.CATE_RANDOM) {
             questions_l = getAllQuestions();
         } else {
@@ -209,6 +211,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("ANSWERING", "ANSWER CLICKED");
         int answerChose = -1;
         int correctButton = 0;
+
         switch (view.getId()) {
             case R.id.btnAnswerA:
                 answerChose = 1;
@@ -234,6 +237,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             //Toast.makeText(QuizActivity.this, getResources().getString(R.string.correct_notification), Toast.LENGTH_LONG).show();
         } else {
             vibrator.vibrate(600);
+            isCorrect = false;
             //Toast.makeText(QuizActivity.this, getResources().getString(R.string.incorrect_notification), Toast.LENGTH_LONG).show();
         }
         //show true answer no matter whether the user answer correctly
@@ -271,10 +275,13 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFinish() {
-                countDownTimer_showAnswer.onFinish();
+                if(category_dat == Question.CATE_RANDOM && !isCorrect){
+                    showresult();
+                }else {
+                    countDownTimer_showAnswer.onFinish();
+                }
             }
         }.start();
-
     }
 
     
