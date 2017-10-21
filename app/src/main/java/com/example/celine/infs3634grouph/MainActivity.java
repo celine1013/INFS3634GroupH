@@ -125,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
     public void onClick(View view) {
 
         switch (view.getId()) {
-
             //send info of diff categories to quiz activities;
             case R.id.btn_general:
                 intent.putExtra(TAG_CATEGORY_SHOW, CATEGORY_01);
@@ -167,6 +166,8 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
     public void onDialogPositiveClick(CustomDialogFragment dialog) {
         speed = dialog.sp_speed.getSelectedItemPosition();
         difficulty = dialog.sp_diff.getSelectedItemPosition();
+        Log.d("SPEED", String.valueOf(speed));
+        Log.d("DIFF", String.valueOf(difficulty));
         intent.putExtra(TAG_SPEED, speed);
         intent.putExtra(TAG_DIFF, difficulty);
         startActivity(intent);

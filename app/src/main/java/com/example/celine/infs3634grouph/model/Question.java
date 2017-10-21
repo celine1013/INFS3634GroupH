@@ -14,9 +14,9 @@ public class Question {
 
     private int score;
 
-    public static final int EASY = 1;
-    public static final int MED = 2;
-    public static final int HARD = 3;
+    public static final int EASY = 0;
+    public static final int MED = 1;
+    public static final int HARD = 2;
 
     public static final int CATE_O1_GENERAL = 1;
     public static final int CATE_O2_FUNDAMENTAL = 2;

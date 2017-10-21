@@ -135,6 +135,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         });*/
         showQuestion();
         int speed = getIntent().getIntExtra(MainActivity.TAG_SPEED, -1);
+        if(speed == -1){
+            Log.e("QUIZ SPEED", "UNKNOWN");
+        }
         switch (speed){
             case MainActivity.SPEED_FAST:
                 time = SP_FAST;
