@@ -261,6 +261,31 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
                 Question.HARD,Question.CATE_O1_GENERAL,options10,1);
         createQuestion(q);
 
+        String[] options71 = {"Cisco","HP","Samsung","Motorola"};
+        q = new Question(71, "Which vendor has no plans for an Android-based tablet?",
+                Question.MED,Question.CATE_O1_GENERAL,options71,2);
+        createQuestion(q);
+
+        String[] options72 = {"UI","Resource","Manager","View"};
+        q = new Question(72, "A ___________ fragment has a view of its own that is inflated from a layout file.",
+                Question.MED,Question.CATE_O1_GENERAL,options72,1);
+        createQuestion(q);
+
+        String[] options73 = {"Only one","Two","AsyncTask doesn't have tread","None of the above"};
+        q = new Question(73, "How many threads are there in asyncTask in android?",
+                Question.MED,Question.CATE_O1_GENERAL,options73,1);
+        createQuestion(q);
+
+        String[] options74 = {"onStop()","onPause()","onDestory()","onRestart()"};
+        q = new Question(74, "If an activity is finishing, the system calls which method:",
+                Question.HARD,Question.CATE_O1_GENERAL,options74,3);
+        createQuestion(q);
+
+        String[] options75 = {"SupportedFragment","FragmentActivity","AppCompatFragment","Fragment"};
+        q = new Question(75, "The Support Library (support-v4) includes an Activity subclass that supports the implementation of fragments. It is called:",
+                Question.HARD,Question.CATE_O1_GENERAL,options75,2);
+        createQuestion(q);
+
         //Fundamentals Questions
         String[] options11 = {"Cupcake","Gingerbread","Honeycomb","Muffin"};
         q = new Question(11, "Which one of the following is NOT a version of Android?",
@@ -310,6 +335,31 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         String[] options20 = {"Services","Simulator","Emulator","None of these"};
         q = new Question(20, "Which of the following don’t have any UI component and run as a background process?",
                 Question.HARD,Question.CATE_O2_FUNDAMENTAL,options20,1);
+        createQuestion(q);
+
+        String[] options76 = {"onCreate()","findViewById()","setContentView","None of the above"};
+        q = new Question(76, "Select the method used to access a view element of a layout resource in an activity:",
+                Question.HARD,Question.CATE_O2_FUNDAMENTAL,options76,2);
+        createQuestion(q);
+
+        String[] options77 = {"com.json","in.json","com.android.JSON","Org.json"};
+        q = new Question(77, "What is the package name of JSON?",
+                Question.MED,Question.CATE_O2_FUNDAMENTAL,options77,4);
+        createQuestion(q);
+
+        String[] options78 = {"Portability","Security","Networking","All of these"};
+        q = new Question(78, "Android is based on Linux for the following reason?",
+                Question.HARD,Question.CATE_O2_FUNDAMENTAL,options78,4);
+        createQuestion(q);
+
+        String[] options79 = {"Object","SstartActivity","Intent","None of the above"};
+        q = new Question(79, "If you want to navigate from one activity to another then android provides you which class?",
+                Question.EASY,Question.CATE_O2_FUNDAMENTAL,options79,3);
+        createQuestion(q);
+
+        String[] options80 = {"Cisco","HP","Samsung","Motorola"};
+        q = new Question(80, "Which vendor has no plans for an Android-based tablet?",
+                Question.HARD,Question.CATE_O2_FUNDAMENTAL,options80,2);
         createQuestion(q);
 
         //Google Questions
@@ -362,6 +412,31 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         String[] options30 = {"Cisco","HP","Samsung","Motorola"};
         q = new Question(30, "Which vendor has no plans for an Android-based tablet?",
                 Question.EASY,Question.CATE_O3_GOOGLE,options30,2);
+        createQuestion(q);
+
+        String[] options81 = {"Android:padding ","Android:digits","Android:capitalize ","Android:autoText"};
+        q = new Question(81, "If you want to increase the whitespace between widgets, you will need to use the ____________ property?",
+                Question.EASY,Question.CATE_O3_GOOGLE,options81,1);
+        createQuestion(q);
+
+        String[] options82 = {"finish()","getGPSStatus()","onProviderDisable()","getGPS()"};
+        q = new Question(82, "Which method is used to find GPS enabled or disabled pro-grammatically in android?",
+                Question.MED,Question.CATE_O3_GOOGLE,options82,3);
+        createQuestion(q);
+
+        String[] options83 = {"onAnchor()","onCreateFragment()","onAttach()","onConnect()"};
+        q = new Question(83, "onCreate of activity adds the fragment and in this moment __________ is called:",
+                Question.HARD,Question.CATE_O3_GOOGLE,options83,3);
+        createQuestion(q);
+
+        String[] options84 = {"C","C++","VC++","Java"};
+        q = new Question(84, "Android is based on which language?",
+                Question.HARD,Question.CATE_O3_GOOGLE,options84,4);
+        createQuestion(q);
+
+        String[] options85 = {"Multitasking","Bluetooth","Video calling","All of the above"};
+        q = new Question(85, "Android supports which features?",
+                Question.MED,Question.CATE_O3_GOOGLE,options85,4);
         createQuestion(q);
 
         //Activity Questions
@@ -421,6 +496,31 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
                 Question.HARD,Question.CATE_O4_ACTIVITY,options40,3);
         createQuestion(q);
 
+        String[] options86 = {"Cisco","HP","Samsung","Motorola"};
+        q = new Question(86, "Which vendor has no plans for an Android-based tablet?",
+                Question.EASY,Question.CATE_O4_ACTIVITY,options86,2);
+        createQuestion(q);
+
+        String[] options87 = {"finish()","getGPSStatus()","onProviderDisable()","getGPS()"};
+        q = new Question(87, "Which method is used to find GPS enabled or disabled pro-grammatically in android?",
+                Question.MED,Question.CATE_O4_ACTIVITY,options87,3);
+        createQuestion(q);
+
+        String[] options88 = {"SupportedFragment","FragmentActivity","AppCompatFragment","Fragment"};
+        q = new Question(88, "The Support Library (support-v4) includes an Activity subclass that supports the implementation of fragments. It is called:",
+                Question.HARD,Question.CATE_O4_ACTIVITY,options88,2);
+        createQuestion(q);
+
+        String[] options89 = {"Only Radio interface layer and alarm are in active mode","Switched off","Airplane mode","None of the Above"};
+        q = new Question(89, "What is sleep mode in android?",
+                Question.HARD,Question.CATE_O4_ACTIVITY,options89,1);
+        createQuestion(q);
+
+        String[] options90 = {"Chrome","Firefox","Open-source Webkit","Opera"};
+        q = new Question(90, "Web browser available in android is based on",
+                Question.MED,Question.CATE_O4_ACTIVITY,options90,3);
+        createQuestion(q);
+
         // Fragment Questions
         String[] options41 = {"Controller","Model","View","None of the above"};
         q = new Question(41, "A fragment is a ________ object:",
@@ -474,6 +574,31 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         String[] options50 = {"Collection of views and other child views","Base class of building blocks","Layouts","None of the above"};
         q = new Question(50, "What is android view group?",
                 Question.MED,Question.CATE_O5_FRAGMENT,options50,1);
+        createQuestion(q);
+
+        String[] options91 = {"KitKat","Lollipop","Marshmallow","Jelly Bean"};
+        q = new Question(91, "Android 6.0 is also referred to as what?",
+                Question.MED,Question.CATE_O5_FRAGMENT,options91,3);
+        createQuestion(q);
+
+        String[] options92 = {"Not possible","Wrong question","Yes, it is possible","None of the above"};
+        q = new Question(92, "Is it possible to have an activity without UI to perform action/actions?",
+                Question.MED,Question.CATE_O5_FRAGMENT,options92,3);
+        createQuestion(q);
+
+        String[] options93 = {"Dalvik","Webkit","SQLite","OpenGL"};
+        q = new Question(93, "Which among these are NOT a part of Android’s native libraries?",
+                Question.HARD,Question.CATE_O5_FRAGMENT,options93,1);
+        createQuestion(q);
+
+        String[] options94 = {"Services","Simulator","Emulator","None of these"};
+        q = new Question(94, "Which of the following don’t have any UI component and run as a background process?",
+                Question.HARD,Question.CATE_O5_FRAGMENT,options94,1);
+        createQuestion(q);
+
+        String[] options95 = {"Object","SstartActivity","Intent","None of the above"};
+        q = new Question(95, "If you want to navigate from one activity to another then android provides you which class?",
+                Question.HARD,Question.CATE_O5_FRAGMENT,options95,3);
         createQuestion(q);
 
         // Intent Questions
@@ -538,6 +663,33 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
                 Question.HARD,Question.CATE_O6_INTENT,options60,3);
         createQuestion(q);
 
+        String[] options96 = {"Sprint Evo 4G","Samsung Galaxy","Motorola Droid X","Nokia N8"};
+        q = new Question(96, "Which smartphone does not run on Android:",
+                Question.MED,Question.CATE_O6_INTENT,options96,4);
+        createQuestion(q);
+
+        String[] options97 = {"BlackBerry","Sidekick","iPhone","Palm Pilot"};
+        q = new Question(97, "What other popular device did Android co-founder Andy Rubin help develop?",
+                Question.HARD,Question.CATE_O6_INTENT,options97,2);
+        createQuestion(q);
+
+        String[] options98 = {"No, we can write the program without writing onCreate() and onStart()",
+                "Yes, we should call onCreate() and onStart() to write the program","At least we need to call onCreate() once","None of the above"};
+        q = new Question(98, "Is it mandatory to call onCreate() and onStart() in android?",
+                Question.MED,Question.CATE_O6_INTENT,options98,1);
+        createQuestion(q);
+
+        String[] options99 = {"Yes, a user can save all database updates in onStop()","No, a user can save in onSavedInstance()",
+                "No, a user can save in a Bundle()","No, In some situations, a user can't reach onStop()"};
+        q = new Question(99, "Can a user save all database updates in onStop ()?",
+                Question.HARD,Question.CATE_O6_INTENT,options99,4);
+        createQuestion(q);
+
+        String[] options100 = {"It will react on broadcast announcements","It will do background functionalities as services","It will pass the data between activities","None of the Above"};
+        q = new Question(100, "Which of the following defines a structured interface to application data?",
+                Question.HARD,Question.CATE_O6_INTENT,options100,1);
+        createQuestion(q);
+
         //Database Questions
         String[] options61 = {"Content values are key pair values, which are updated or inserted in the database",
                 "Cursor is used to store the temporary result","A & B","Content values are used to share the data."};
@@ -583,13 +735,41 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
 
         String[] options69 = {"Permanent data","Secure data","Temporary data","Logical data"};
         q = new Question(69, "What is transient data in android?",
-                Question.EASY,Question.CATE_O7_DATABASE,options69,4);
+                Question.MED,Question.CATE_O7_DATABASE,options69,4);
         createQuestion(q);
 
         String[] options70 = {"When the application is not responding ANR will occur","Dialog box is called as ANR.",
                 "When Android forcefully kills an application, it is called ANR","None of the above"};
         q = new Question(70, "What is ANR in android?",
-                Question.EASY,Question.CATE_O7_DATABASE,options70,1);
+                Question.MED,Question.CATE_O7_DATABASE,options70,1);
         createQuestion(q);
+
+        String[] options101 = {"Android:padding ","Android:digits","Android:capitalize ","Android:autoText"};
+        q = new Question(101, "If you want to increase the whitespace between widgets, you will need to use the ____________ property?",
+                Question.MED,Question.CATE_O7_DATABASE,options101,1);
+        createQuestion(q);
+
+        String[] options102 = {"getAction()","getData()","getIntent()","getExtra()"};
+        q = new Question(102, "An intent can also contain additional data based on an instance of the Bundle class which can be retrieved from the intent using which method:",
+                Question.HARD,Question.CATE_O7_DATABASE,options102,4);
+        createQuestion(q);
+
+        String[] options103 = {"commitUpdates()","updates()","commit()","None of these"};
+        q = new Question(103, "To update contents of content provider using curser and commit you need to call________?",
+                Question.HARD,Question.CATE_O7_DATABASE,options103,1);
+        createQuestion(q);
+
+        String[] options104 = {"Only one","Two","AsyncTask doesn't have tread","None of the above"};
+        q = new Question(104, "How many threads are there in asyncTask in android?",
+                Question.HARD,Question.CATE_O7_DATABASE,options104,1);
+        createQuestion(q);
+
+        String[] options105 = {"To allow them to advertise more","To corner the mobile device application market for licensing purposes",
+                "To directly compete with the iPhone","To level the playing field for mobile devices"};
+        q = new Question(105, "What was Google’s main business motivation for supporting Android?",
+                Question.HARD,Question.CATE_O7_DATABASE,options105,1);
+        createQuestion(q);
+
     }
+
 }
