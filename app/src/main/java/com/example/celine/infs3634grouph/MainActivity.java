@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         super.onStop();
     }
 
-    // TODO: 7/10/2017 complete onclick
     @Override
     public void onClick(View view) {
 

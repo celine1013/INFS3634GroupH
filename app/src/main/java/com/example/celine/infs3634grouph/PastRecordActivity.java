@@ -28,7 +28,7 @@ public class PastRecordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_past_record);
         rv_history = findViewById(R.id.rv_history);
         cr = getContentResolver();
-        // TODO: 22/10/2017 set adapter
+        //set adapter
         rv_history.setLayoutManager(new LinearLayoutManager(this));
         records = getAllRecords();
         rv_history.setAdapter(new RecordAdapter(this,records));

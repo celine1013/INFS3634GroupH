@@ -14,7 +14,7 @@
         android:layout_marginTop="@dimen/margin_ver"
         android:fontFamily="casual"
         android:text="History"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorBlack"
         android:textStyle="bold" />
 

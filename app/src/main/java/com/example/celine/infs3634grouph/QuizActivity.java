@@ -369,7 +369,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         r.setDifficulty(diff);
         r.setScore(scoreTotal);
         // TODO: 22/10/2017 get current timestamp
-        DateFormat df = new SimpleDateFormat("yyyy.MMM.dd G 'at' HH:mm:ss z");
+        DateFormat df = new SimpleDateFormat("MMM.dd 'at' HH:mm");
         String date = df.format(Calendar.getInstance().getTime());
         r.setDate(date);
         createRecord(r);

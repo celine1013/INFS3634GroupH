@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_ver"
     android:paddingBottom="@dimen/card_pad"
     android:paddingTop="@dimen/card_pad"
-    app:cardBackgroundColor="@color/colorYellow">
+    app:cardBackgroundColor="@color/colorYellow"
+    app:layout_goneMarginBottom="@dimen/margin_ver">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +22,8 @@
             android:layout_margin="@dimen/margin_ver"
             android:fontFamily="casual"
             android:text="@string/category_01"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_diff"

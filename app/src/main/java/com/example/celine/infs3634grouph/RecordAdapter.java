@@ -39,7 +39,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
 
         holder.tv_cate.setText(mContext.getResources().getString(record.getCategory()));
         holder.tv_diff.setText(record.getSDifficulty());
-        holder.tv_speed.setText(record.getSSpeed());
+        String str = record.getSSpeed()+ " Speed";
+        holder.tv_speed.setText(str);
         holder.tv_score.setText(String.valueOf(record.getScore()));
         holder.tv_time.setText(record.getDate());
     }
