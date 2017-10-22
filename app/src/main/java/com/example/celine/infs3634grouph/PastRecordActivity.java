@@ -38,7 +38,7 @@ public class PastRecordActivity extends AppCompatActivity {
     public List<Record> getAllRecords() {
 
         // records are ordered by score
-        String orderBy = DatabaseContract.RecordEntry.RECORD_SCORE + " DESC";
+        String orderBy = DatabaseContract.RecordEntry.RECORD_SCORE + " DESC LIMIT 10";
         Cursor c = cr.query(RecordProvider.CONTENT_URI, DatabaseContract.RecordEntry.RECORD_ALL_COLUMNS, null, null, orderBy);
         List<Record> records = new ArrayList<>();
         // looping through all rows and adding to list
