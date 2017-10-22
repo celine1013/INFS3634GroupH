@@ -45,6 +45,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + DatabaseContract.QuestionEntry.QUESTION_ANSWER_OPTIONS_4 + " TEXT,"
             + DatabaseContract.QuestionEntry.QUESTION_TRUE_ANSWER + " INTEGER" + ")";
 
+    private static final String CREATE_TABLE_RECORD = "CREATE TABLE IF NOT EXISTS "
+            + DatabaseContract.RecordEntry.TABLE_RECORD
+            + "(" + DatabaseContract.RecordEntry.RECORD_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + DatabaseContract.RecordEntry.RECORD_TIME + " TEXT,"
+            + DatabaseContract.RecordEntry.RECORD_CATE + " INTEGER,"
+            + DatabaseContract.RecordEntry.RECORD_DIFF + " INTEGER,"
+            + DatabaseContract.RecordEntry.RECORD_SCORE+ " INTEGER,"
+            + DatabaseContract.RecordEntry.RECORD_SPEED + " INTEGER" + ")";
+
     //Constructor
 
 
@@ -57,7 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // creating required tables
         db.execSQL(CREATE_TABLE_QUESTION);
-        // TODO: 12/10/2017 preload data here
+        db.execSQL(CREATE_TABLE_RECORD);
         Log.i("DATABASE SETTING", "TABLE CREATION COMPLETED");
     }
 
@@ -66,6 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.QuestionEntry.TABLE_QUESTION);
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.RecordEntry.TABLE_RECORD);
         // create new tables
         onCreate(db);
     }
@@ -75,14 +85,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("CLEAN", "cleaning database");
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.QuestionEntry.TABLE_QUESTION);
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.RecordEntry.TABLE_RECORD);
         onCreate(db);
         Log.d("CLEAN", "DATABASE CLEANED");
-    }
-
-    public void closeDB() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        if (db != null && db.isOpen())
-            db.close();
     }
 
     /*not yet needed*/

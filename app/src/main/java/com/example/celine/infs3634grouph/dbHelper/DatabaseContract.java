@@ -30,4 +30,22 @@ public class DatabaseContract {
                 QUESTION_ANSWER_OPTIONS_1,QUESTION_ANSWER_OPTIONS_2,QUESTION_ANSWER_OPTIONS_3,QUESTION_ANSWER_OPTIONS_4,
                 QUESTION_TRUE_ANSWER};
     }
+
+    public static final class RecordEntry implements BaseColumns{
+        // Table names
+        public static final String TABLE_RECORD = "records";
+
+        // Column names
+        public static final String RECORD_USER_ID = "record_user_id"; //for future usage
+        public static final String RECORD_TIME = "record_time";
+        public static final String RECORD_DIFF = "record_diff";
+        public static final String RECORD_SPEED = "record_speed";
+        public static final String RECORD_CATE = "record_cate";
+        public static final String RECORD_SCORE = "record_score";
+
+
+        public static final String[] RECORD_ALL_COLUMNS =
+                {RECORD_USER_ID, RECORD_TIME, RECORD_DIFF, RECORD_SPEED,RECORD_CATE,
+                        RECORD_SCORE};
+    }
 }

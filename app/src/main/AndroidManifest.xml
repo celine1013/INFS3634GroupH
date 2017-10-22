@@ -24,6 +24,10 @@
             android:name=".dbHelper.QuestionProvider"
             android:authorities="com.example.celine.infs3634grouph.questionprovider"
             android:exported="false" />
+        <provider
+            android:name=".dbHelper.RecordProvider"
+            android:authorities="com.example.celine.infs3634grouph.recordprovider"
+            android:exported="false" />
 
         <activity android:name=".CustomDialogActivity"
             android:theme="@style/Theme.AppCompat.Dialog">
