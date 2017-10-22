@@ -39,7 +39,15 @@ public class Record {
         this.time = date;
     }
 
-    public String getDifficulty() {
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public String getSDifficulty() {
         String result = "";
         switch (this.difficulty){
             case DIFF_EASY:
@@ -59,7 +67,7 @@ public class Record {
         this.difficulty = difficulty;
     }
 
-    public String getSpeed() {
+    public String getSSpeed() {
         String result = "";
         switch (this.speed){
             case SPEED_SLOW:

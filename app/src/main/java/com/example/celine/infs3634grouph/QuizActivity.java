@@ -1,10 +1,12 @@
 package com.example.celine.infs3634grouph;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -17,14 +19,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Currency;
 import java.util.List;
 
 import com.example.celine.infs3634grouph.dbHelper.DatabaseContract;
 import com.example.celine.infs3634grouph.dbHelper.DatabaseHelper;
 import com.example.celine.infs3634grouph.dbHelper.QuestionProvider;
+import com.example.celine.infs3634grouph.dbHelper.RecordProvider;
 import com.example.celine.infs3634grouph.model.Question;
+import com.example.celine.infs3634grouph.model.Record;
 
 import static java.lang.Math.*;
 
@@ -68,6 +75,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private int progress = 0;
     private int time = 10000;
     private int category_dat;
+    private int category_str;
+    private int speed;
+    private int diff;
     private boolean isCorrect = true;
 
     private ProgressBar pb_countDown;
@@ -95,7 +105,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         cr = getContentResolver();
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         // specify a number of random questions within the specific category
-        int category_str = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY_SHOW, -1);//get category from intent
+        category_str = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY_SHOW, -1);//get category from intent
         //catch unknown error
         if (category_str == -1) {
             Log.e("QUIZ ACTIVITY", "NO CATEGORY RECEIVED, ACTIVITY FINISHED");
@@ -136,7 +146,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             }
         });*/
         showQuestion();
-        int speed = getIntent().getIntExtra(MainActivity.TAG_SPEED, -1);
+        speed = getIntent().getIntExtra(MainActivity.TAG_SPEED, -1);
         if(speed == -1){
             Log.e("QUIZ SPEED", "UNKNOWN");
         }
@@ -349,12 +359,29 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 QuizActivity.this.recreate();
             }
         });
-        // show correct answer number x/5
+        // show correct answer number
         show_correctNum.setText(String.valueOf(correctNum) + "/" + String.valueOf(currentNum));
+
+        //save record
+        Record r = new Record();
+        r.setCategory(category_str);
+        r.setSpeed(speed);
+        r.setDifficulty(diff);
+        r.setScore(scoreTotal);
+        // TODO: 22/10/2017 get current timestamp
+        DateFormat df = new SimpleDateFormat("yyyy.MMM.dd G 'at' HH:mm:ss z");
+        String date = df.format(Calendar.getInstance().getTime());
+        r.setDate(date);
+        createRecord(r);
+
+        // TODO: 22/10/2017 notice user if it's the highest score;
+        if(isHighest(scoreTotal)){
+            // TODO: 22/10/2017 dialog
+        }
     }
 
     public List<Question> getAllQuestions() {
-        int diff = getIntent().getIntExtra(MainActivity.TAG_DIFF, -1);
+        diff = getIntent().getIntExtra(MainActivity.TAG_DIFF, -1);
         String selection = DatabaseContract.QuestionEntry.QUESTION_DIFFICULTY + " = " + diff;
         Cursor c = cr.query(QuestionProvider.CONTENT_URI, DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS, selection, null, "RANDOM()");
         List<Question> questions = new ArrayList<>();
@@ -386,8 +413,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     public List<Question> getQuestionsByCategory(int category) {
         List<Question> questions = new ArrayList<>();
-        int difficulty = getIntent().getIntExtra(MainActivity.TAG_DIFF,-1);
-        String str1 = DatabaseContract.QuestionEntry.QUESTION_DIFFICULTY + " = " + difficulty;
+        diff = getIntent().getIntExtra(MainActivity.TAG_DIFF,-1);
+        String str1 = DatabaseContract.QuestionEntry.QUESTION_DIFFICULTY + " = " + diff;
         String str2 = DatabaseContract.QuestionEntry.QUESTION_CATEGORY + " = " + category;
         String selection = str1 + " AND " + str2;
         Cursor c = cr.query(QuestionProvider.CONTENT_URI, DatabaseContract.QuestionEntry.QUESTION_ALL_COLUMNS, selection, null, "RANDOM() LIMIT 5");
@@ -416,5 +443,26 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         }
         c.close();
         return questions;
+    }
+
+    public Uri createRecord(Record record) {
+
+        ContentValues values = new ContentValues();
+
+        values.put(DatabaseContract.RecordEntry.RECORD_CATE, record.getCategory());
+        values.put(DatabaseContract.RecordEntry.RECORD_SPEED, record.getSpeed());
+        values.put(DatabaseContract.RecordEntry.RECORD_DIFF, record.getDifficulty());
+        values.put(DatabaseContract.RecordEntry.RECORD_SCORE, record.getScore());
+        values.put(DatabaseContract.RecordEntry.RECORD_TIME, record.getDate());
+        // insert row
+        Uri id = cr.insert(RecordProvider.CONTENT_URI,values);
+
+        return id;
+    }
+
+    public boolean isHighest(int score){
+        boolean result = false;
+
+        return result;
     }
 }

@@ -8,7 +8,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/quickStartBtn"
+        android:layout_above="@+id/btn_set"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
 
@@ -298,18 +298,39 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/quickStartBtn"
+    <LinearLayout
+        android:id="@+id/btn_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/colorBlack"
-        android:fontFamily="casual"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:paddingBottom="20dp"
-        android:text="@string/text_quickStart"
-        android:textColor="@color/colorWhite"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/quickStartBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorBlack"
+            android:fontFamily="casual"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="@string/text_quickStart"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_his"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorBlack"
+            android:fontFamily="casual"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="@string/text_history"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 </RelativeLayout>

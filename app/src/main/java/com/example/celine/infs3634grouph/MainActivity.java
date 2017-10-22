@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
 
     //declare all widgets
     private Button btn_quickStart;
+    private Button btn_history;
     private CardView btn_general;
     private CardView btn_fundamentals;
     private CardView btn_google;
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         intent = new Intent(MainActivity.this, QuizActivity.class);
 
         btn_quickStart = (Button) findViewById(R.id.quickStartBtn);
+        btn_history = (Button)findViewById(R.id.btn_his);
         btn_general = (CardView)findViewById(R.id.btn_general);
         btn_fundamentals = (CardView)findViewById(R.id.btn_fundamental);
         btn_fragments = (CardView)findViewById(R.id.btn_fragments);
@@ -97,6 +99,13 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         btn_intent.setOnClickListener(this);
         btn_database.setOnClickListener(this);
 
+        btn_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PastRecordActivity.class);
+                startActivity(intent);
+            }
+        });
         /*mp = MediaPlayer.create(MainActivity.this, R.raw.bgm01);
         mp.setLooping(true); // Set looping
         mp.setVolume(1.0f, 1.0f);

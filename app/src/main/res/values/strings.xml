@@ -23,6 +23,7 @@
     <string name="text_speed">Speed</string>
     <string name="text_diff">Difficulty</string>
     <string name="text_num_question">Number of Question</string>
+    <string name="text_history">History</string>
 
     <string-array name="arr_speed">
         <item>Slow</item>
