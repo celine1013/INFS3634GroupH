@@ -73,9 +73,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressBar pb_countDown;
     private CountDownTimer countDownTimer_showAnswer;
 
-    private static final int SP_FAST = 5000;
-    private static final int SP_MED = 10000;
-    private static final int SP_SLOW = 15000;
+    private static final int SP_FAST = 12000;
+    private static final int SP_MED = 18000;
+    private static final int SP_SLOW = 24000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -267,7 +267,11 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerD.setClickable(false);
         Button btn_choose = (Button) findViewById(correctButton);
         btn_choose.setBackgroundColor(getColor(R.color.colorGreen));
-        CountDownTimer ct = new CountDownTimer(1500, 250) {
+
+        //stop the original timer
+        //prevent calling onFinish when ct is still working
+        countDownTimer_showAnswer.cancel();
+        CountDownTimer ct = new CountDownTimer(2000, 250) {
             @Override
             public void onTick(long l) {
 

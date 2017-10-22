@@ -60,7 +60,7 @@ public class CustomDialogFragment extends DialogFragment {
         sp_diff.setAdapter(adapter);
         ArrayAdapter adapter2 = ArrayAdapter.createFromResource(getActivity(),
                 R.array.arr_speed, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_speed.setAdapter(adapter2);
 
         builder.setView(view).setPositiveButton(R.string.text_ok, new DialogInterface.OnClickListener() {
