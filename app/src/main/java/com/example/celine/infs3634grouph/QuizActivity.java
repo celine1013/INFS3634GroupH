@@ -62,7 +62,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     private Vibrator vibrator;
     private MediaPlayer mp;
-    private BackgroundSound bgm;
 
 
     //declare
@@ -94,6 +93,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+
         // binding
         show_category = (TextView) findViewById(R.id.textViewCategory);
         show_questionNumber = (TextView) findViewById(R.id.questionNum);
@@ -133,38 +133,31 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerC.setOnClickListener(this);
         btn_answerD.setOnClickListener(this);
 
-        /*next_question.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //show_score.setText(score)
-                if(currentNum + 1 < questions_l.size()){
-                    currentNum ++;
-                    showQuestion();
-                    show_score.setText(String.valueOf(scoreTotal));
-                    
-                }else{
-                    currentNum = 0;
-                    showresult();
-                }
-            }
-        });*/
         showQuestion();
         speed = getIntent().getIntExtra(MainActivity.TAG_SPEED, -1);
         if(speed == -1){
             Log.e("QUIZ SPEED", "UNKNOWN");
         }
+
+        //change backgound music depends on speed
         switch (speed){
             case MainActivity.SPEED_FAST:
                 time = SP_FAST;
+                mp = MediaPlayer.create(QuizActivity.this, R.raw.fast);
                 break;
             case MainActivity.SPEED_MEDIUM:
+                mp = MediaPlayer.create(QuizActivity.this, R.raw.medium);
                 time = SP_MED;
                 break;
             case MainActivity.SPEED_SLOW:
+                mp = MediaPlayer.create(QuizActivity.this, R.raw.slow);
                 time = SP_SLOW;
                 break;
         }
+        mp.setLooping(true); // Set looping
+        mp.setVolume(2.0f, 2.0f);
+        mp.start();
+
         countDownTimer_showAnswer = new CountDownTimer(time, 100) {
             @Override
             public void onTick(long l) {
@@ -189,34 +182,11 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
-    @Override
-    public void onResume(){
-        super.onResume();
-        bgm = (BackgroundSound)new BackgroundSound().execute();
-    }
+
     @Override
     public void onPause(){
         super.onPause();
         mp.stop();
-        bgm.cancel(true);
-    }
-    public class BackgroundSound extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            mp = MediaPlayer.create(QuizActivity.this, R.raw.numb);
-            mp.setLooping(true); // Set looping
-            mp.setVolume(2.0f, 2.0f);
-            mp.start();
-
-            return null;
-        }
-
-        @Override
-        protected void onCancelled() {
-            mp.stop();
-        }
-
     }
 
     @Override

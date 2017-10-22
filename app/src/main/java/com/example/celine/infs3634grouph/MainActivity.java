@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
     private ContentResolver cr;
 
     public MediaPlayer mp;
-    private BackgroundSound bgm;
     private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,27 +105,22 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
                 startActivity(intent);
             }
         });
-        /*mp = MediaPlayer.create(MainActivity.this, R.raw.bgm01);
-        mp.setLooping(true); // Set looping
-        mp.setVolume(1.0f, 1.0f);
-        mp.start();*/
+
 
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        bgm = (BackgroundSound)new BackgroundSound().execute();
+        mp = MediaPlayer.create(MainActivity.this, R.raw.bgm01);
+        mp.setLooping(true); // Set looping
+        mp.setVolume(1.0f, 1.0f);
+        mp.start();
     }
     @Override
     public void onPause(){
         super.onPause();
         mp.stop();
-        bgm.cancel(true);
-    }
-    @Override
-    public void onStop(){
-        super.onStop();
     }
 
     @Override
@@ -186,24 +180,6 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         dialog.getDialog().cancel();
     }
 
-    public class BackgroundSound extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            mp = MediaPlayer.create(MainActivity.this, R.raw.bgm01);
-            mp.setLooping(true); // Set looping
-            mp.setVolume(1.0f, 1.0f);
-            mp.start();
-
-            return null;
-        }
-
-        @Override
-        protected void onCancelled() {
-            mp.stop();
-        }
-
-    }
     //CRUD
     public Uri createQuestion(Question question) {
 

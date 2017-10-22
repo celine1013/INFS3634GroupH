@@ -2,6 +2,7 @@ package com.example.celine.infs3634grouph;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ public class PastRecordActivity extends AppCompatActivity {
     private ContentResolver cr;
 
     private List<Record> records;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
