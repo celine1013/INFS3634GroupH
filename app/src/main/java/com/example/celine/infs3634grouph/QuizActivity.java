@@ -154,7 +154,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 time = SP_SLOW;
                 break;
         }
-        mp.setLooping(true); // Set looping
+
+        mp.setLooping(true);
         mp.setVolume(2.0f, 2.0f);
         mp.start();
 
@@ -348,10 +349,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         r.setDate(date);
         createRecord(r);
 
-        // TODO: 22/10/2017 notice user if it's the highest score;
+
         if(isHighest(scoreTotal)){
-            // TODO: 22/10/2017 dialog
-           Toast.makeText(QuizActivity.this, "congrats", Toast.LENGTH_SHORT).show();
+
+           //Toast.makeText(QuizActivity.this, "congrats", Toast.LENGTH_SHORT).show();
             NotificationDialog dialog = new NotificationDialog();
             dialog.show(getSupportFragmentManager(),"NOTIFICATION DIALOG");
 

@@ -35,6 +35,17 @@ public class PastRecordActivity extends AppCompatActivity {
         records = getAllRecords();
         rv_history.setAdapter(new RecordAdapter(this,records));
 
+        mp = MediaPlayer.create(PastRecordActivity.this, R.raw.numb);
+        mp.setLooping(true);
+        mp.setVolume(2.0f, 2.0f);
+        mp.start();
+
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        mp.stop();
     }
 
     public List<Record> getAllRecords() {
