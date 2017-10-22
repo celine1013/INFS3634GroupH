@@ -25,6 +25,9 @@
     <string name="text_num_question">Number of Question</string>
     <string name="text_history">History</string>
 
+    <string name="dialog_title">Congratulations !</string>
+    <string name="dialog_message">You have reach the highest score !</string>
+
     <string-array name="arr_speed">
         <item>Slow</item>
         <item>Medium</item>

@@ -1,8 +1,10 @@
 package com.example.celine.infs3634grouph;
 
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.media.MediaPlayer;
@@ -10,6 +12,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -368,7 +372,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         r.setSpeed(speed);
         r.setDifficulty(diff);
         r.setScore(scoreTotal);
-        // TODO: 22/10/2017 get current timestamp
+
         DateFormat df = new SimpleDateFormat("MMM.dd 'at' HH:mm");
         String date = df.format(Calendar.getInstance().getTime());
         r.setDate(date);
@@ -377,6 +381,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         // TODO: 22/10/2017 notice user if it's the highest score;
         if(isHighest(scoreTotal)){
             // TODO: 22/10/2017 dialog
+           Toast.makeText(QuizActivity.this, "congrats", Toast.LENGTH_SHORT).show();
+            NotificationDialog dialog = new NotificationDialog();
+            dialog.show(getSupportFragmentManager(),"NOTIFICATION DIALOG");
+
         }
     }
 
@@ -462,7 +470,39 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     public boolean isHighest(int score){
         boolean result = false;
+        int s = 0;
+        Cursor c = cr.query(RecordProvider.CONTENT_URI, new String[]{"MAX("
+                + DatabaseContract.RecordEntry.RECORD_SCORE
+                +")"}, null, null, null);
 
+        if (c.moveToFirst()) {
+            s = c.getInt(c.getColumnIndex(DatabaseContract.RecordEntry.RECORD_SCORE));
+        }
+        if (s <= score) result = true;
+        c.close();
         return result;
+    }
+
+    public static class NotificationDialog extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.dialog_title);
+            builder.setMessage(R.string.dialog_message);
+            builder.setPositiveButton("View History", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(getActivity(), PastRecordActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton(R.string.text_cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
     }
 }

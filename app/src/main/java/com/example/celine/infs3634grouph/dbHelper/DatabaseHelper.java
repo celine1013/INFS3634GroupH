@@ -85,7 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("CLEAN", "cleaning database");
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.QuestionEntry.TABLE_QUESTION);
-        //db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.RecordEntry.TABLE_RECORD);
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.RecordEntry.TABLE_RECORD);
         onCreate(db);
         Log.d("CLEAN", "DATABASE CLEANED");
     }
