@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorUNSWYellow"
-    android:padding="10dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/margin_ver"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
@@ -18,22 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:gravity="center"
-            android:paddingBottom="20dp"
-            android:paddingLeft="125dp"
-            android:paddingTop="20dp"
-            android:textColor="@color/colorBlack"
-            android:textSize="100dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="casual"
-            android:gravity="center"
-            android:paddingBottom="20dp"
-            android:paddingRight="110dp"
-            android:paddingTop="20dp"
-            android:text="/5"
+            android:text="10/10"
             android:textColor="@color/colorBlack"
             android:textSize="100dp" />
 
@@ -90,10 +76,6 @@
         android:textColor="@color/colorWhite"
         android:textSize="20dp"
         android:textStyle="bold" />
-
-
-
-
 
 
 </RelativeLayout>

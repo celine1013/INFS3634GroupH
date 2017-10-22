@@ -167,7 +167,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                     showQuestion();
                     this.start();
                 } else {
-                    currentNum = 0;
                     showresult();
                 }
             }
@@ -351,7 +350,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         // show correct answer number x/5
-        show_correctNum.setText(String.valueOf(correctNum));
+        show_correctNum.setText(String.valueOf(correctNum) + "/" + String.valueOf(currentNum));
     }
 
     public List<Question> getAllQuestions() {
