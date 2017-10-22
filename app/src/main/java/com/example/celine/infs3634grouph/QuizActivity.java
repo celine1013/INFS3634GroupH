@@ -137,7 +137,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         showQuestion();
         speed = getIntent().getIntExtra(MainActivity.TAG_SPEED, -1);
         if(speed == -1){
-            Log.e("QUIZ SPEED", "UNKNOWN");
+            Log.e("QUIZ SPEED", "SPEED NOT FOUND");
         }
 
         //change backgound music depends on speed

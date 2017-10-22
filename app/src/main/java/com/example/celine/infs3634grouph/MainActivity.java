@@ -778,7 +778,7 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         q = new Question(105, "What was Google’s main business motivation for supporting Android?",
                 Question.HARD,Question.CATE_O7_DATABASE,options105,1);
         createQuestion(q);
-
+        Log.v("DATABASE SETTING", "DATABASE SETTING COMPLETED");
     }
 
 }
