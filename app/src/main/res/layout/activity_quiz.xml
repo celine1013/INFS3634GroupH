@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top"
-    android:background="@color/colorUNSWYellow"
     tools:context="com.example.celine.infs3634grouph.QuizActivity">
 
     <ScrollView

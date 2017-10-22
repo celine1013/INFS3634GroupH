@@ -29,9 +29,10 @@
             android:authorities="com.example.celine.infs3634grouph.recordprovider"
             android:exported="false" />
 
-        <activity android:name=".CustomDialogActivity"
-            android:theme="@style/Theme.AppCompat.Dialog">
-        </activity>
+        <activity
+            android:name=".CustomDialogActivity"
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+        <activity android:name=".PastRecordActivity"></activity>
     </application>
 
 </manifest>
