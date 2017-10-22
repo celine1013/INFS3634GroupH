@@ -10,7 +10,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
- * Created by Celine on 22/10/2017.
+ * Edited by Celine on 12/10/2017.
+ * Refer to : lecture slides from INFS3634
+ *            lynda video: https://www.lynda.com/Android-tutorials/Managing-database-content-provider/377485/406765-4.html?org=unsw.edu.au
  */
 
 public class RecordProvider extends ContentProvider {

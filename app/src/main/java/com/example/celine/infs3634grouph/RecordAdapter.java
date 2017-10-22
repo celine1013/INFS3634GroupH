@@ -11,7 +11,8 @@ import com.example.celine.infs3634grouph.model.Record;
 import java.util.List;
 
 /**
- * Created by Celine on 22/10/2017.
+ * Edited by Celine on 12/10/2017.
+ * Refer to : lynda video: https://www.lynda.com/Android-tutorials/Display-data-RecyclerView/486757/555452-4.html?org=unsw.edu.au
  */
 
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordViewHolder> {
@@ -34,8 +35,6 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
     @Override
     public void onBindViewHolder(RecordViewHolder holder, int position) {
         final Record record = mItems.get(position);
-
-        // TODO: 10/09/2017 add the image
 
         holder.tv_cate.setText(mContext.getResources().getString(record.getCategory()));
         holder.tv_diff.setText(record.getSDifficulty());

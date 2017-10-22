@@ -64,7 +64,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private MediaPlayer mp;
 
 
-    //declare
+    //declare variables used
     private static final int MAX_QUESTION_NUM = 10;
     private int correctNum;
     private int currentCorrect = 0;
@@ -118,6 +118,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         // show category
         show_category.setText(getResources().getString(category_str));
 
+        //get question list from database
         category_dat = this.getIntent().getIntExtra(MainActivity.TAG_CATEGORY_DATA, -1);
         if (category_dat == Question.CATE_RANDOM) {
             questions_l = getAllQuestions();
@@ -126,7 +127,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-        // calculate score, change the text field
+        // set up onClickListener
         show_score.setText(String.valueOf(scoreTotal));
         btn_answerA.setOnClickListener(this);
         btn_answerB.setOnClickListener(this);
@@ -155,14 +156,15 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
+        //play background music
         mp.setLooping(true);
         mp.setVolume(2.0f, 2.0f);
         mp.start();
 
+        //setup and start the timer
         countDownTimer_showAnswer = new CountDownTimer(time, 100) {
             @Override
             public void onTick(long l) {
-
                 pb_countDown.setProgress((int)progress*100/(time/100));
                 progress++;
             }
@@ -171,6 +173,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             public void onFinish() {
                 pb_countDown.setProgress(0);
                 progress = 0;
+
+                //if there are more questions, jump to next
+                //if quiz ends, show quiz result
                 if (currentNum< questions_l.size()) {
                     showQuestion();
                     this.start();
@@ -192,7 +197,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        Log.d("ANSWERING", "ANSWER CLICKED");
+        Log.v("ANSWERING", "ANSWER CLICKED");
         int answerChose = -1;
         int correctButton = 0;
 
@@ -210,9 +215,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 answerChose = 4;
                 break;
         }
-        // 7/10/2017 verify if answer chose match currentAnswer
-        //if matched, currentCorrect increase, show correct notification, score changed
-        //if mismatched, show incorrect notification
+        //verify if answer chose match currentAnswer
         if (answerChose == currentCorrect) {
             correctNum++;
             scoreTotal += curSocre;
@@ -225,7 +228,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             //Toast.makeText(QuizActivity.this, getResources().getString(R.string.incorrect_notification), Toast.LENGTH_LONG).show();
         }
         //show true answer no matter whether the user answer correctly
-        //true answer btn's background color turns green, others turn green
+        //true answer btn's background color turns green, others turn red
         //score change
         switch (currentCorrect) {
             case 1:
@@ -245,16 +248,20 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerB.setBackgroundColor(getColor(R.color.colorRed));
         btn_answerC.setBackgroundColor(getColor(R.color.colorRed));
         btn_answerD.setBackgroundColor(getColor(R.color.colorRed));
+
+        //the answer options can only be clicked once
         btn_answerA.setClickable(false);
         btn_answerB.setClickable(false);
         btn_answerC.setClickable(false);
         btn_answerD.setClickable(false);
         Button btn_choose = (Button) findViewById(correctButton);
+        //change the correct one's color
         btn_choose.setBackgroundColor(getColor(R.color.colorGreen));
 
         //stop the original timer
         //prevent calling onFinish when ct is still working
         countDownTimer_showAnswer.cancel();
+        //create another timer for showing correct answer, then automatically jump to next question
         CountDownTimer ct = new CountDownTimer(2000, 250) {
             @Override
             public void onTick(long l) {
@@ -263,6 +270,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFinish() {
+                //if game mode is quick start, the quiz ends whenever players answer incorrectly
                 if(category_dat == Question.CATE_RANDOM && !isCorrect){
                     showresult();
                 }else {
@@ -272,13 +280,12 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         }.start();
     }
 
-    
+    //show question on the layout
     private void showQuestion(){
-        // show the first question and answer options
-        //maxQuestionNum = questions.size();
         show_score.setText(String.valueOf(scoreTotal));
         q = questions_l.get(currentNum);
         currentCorrect = q.getTrueAnswer();
+
         // show question number
         show_questionNumber.setText(String.valueOf(currentNum+ 1 ));
         // get questions using category data sent by main activity
@@ -291,6 +298,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btn_answerC.setText(options[2]);
         btn_answerD.setText(options[3]);
 
+        //reset color and clickable state
         btn_answerA.setBackgroundColor(getColor(R.color.colorBlack));
         btn_answerB.setBackgroundColor(getColor(R.color.colorBlack));
         btn_answerC.setBackgroundColor(getColor(R.color.colorBlack));
@@ -313,7 +321,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         show_correctNum = (TextView)findViewById(R.id.showCorrectNum);
 
         // show final score, etc.
-        // TODO: 17/10/2017 change the layout of result: score, correct num
         show_result.setText(String.valueOf(scoreTotal));
         // btn: finish->go back to main activity;
         btn_tryAnother.setOnClickListener(new View.OnClickListener() {
@@ -349,16 +356,15 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         r.setDate(date);
         createRecord(r);
 
-
+        //if users reached new highest score, show notification using alertdialog
         if(isHighest(scoreTotal)){
-
-           //Toast.makeText(QuizActivity.this, "congrats", Toast.LENGTH_SHORT).show();
             NotificationDialog dialog = new NotificationDialog();
             dialog.show(getSupportFragmentManager(),"NOTIFICATION DIALOG");
 
         }
     }
 
+    //get questions regardless of categories with random order
     public List<Question> getAllQuestions() {
         diff = getIntent().getIntExtra(MainActivity.TAG_DIFF, -1);
         String selection = DatabaseContract.QuestionEntry.QUESTION_DIFFICULTY + " = " + diff;
@@ -390,6 +396,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         return questions;
     }
 
+    //get questions with different categories, the number of questions is limited to 5
     public List<Question> getQuestionsByCategory(int category) {
         List<Question> questions = new ArrayList<>();
         diff = getIntent().getIntExtra(MainActivity.TAG_DIFF,-1);
@@ -425,7 +432,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public Uri createRecord(Record record) {
-
         ContentValues values = new ContentValues();
 
         values.put(DatabaseContract.RecordEntry.RECORD_CATE, record.getCategory());
@@ -439,6 +445,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         return id;
     }
 
+    //verify if the users create a new highest score
     public boolean isHighest(int score){
         boolean result = false;
         int s = 0;

@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
 
     public MediaPlayer mp;
     private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         setDatabase();
         intent = new Intent(MainActivity.this, QuizActivity.class);
 
+        //binding
         btn_quickStart = (Button) findViewById(R.id.quickStartBtn);
         btn_history = (Button)findViewById(R.id.btn_his);
         btn_general = (CardView)findViewById(R.id.btn_general);
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         btn_intent = (CardView)findViewById(R.id.btn_intents);
         btn_database = (CardView)findViewById(R.id.btn_database);
 
-
+        //set onclicklistener
         btn_quickStart.setOnClickListener(this);
         btn_general.setOnClickListener(this);
         btn_fundamentals.setOnClickListener(this);
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
 
     }
 
+    //play background music
     @Override
     public void onResume(){
         super.onResume();
@@ -117,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         mp.setVolume(1.0f, 1.0f);
         mp.start();
     }
+    //stop background music
     @Override
     public void onPause(){
         super.onPause();
@@ -161,9 +165,13 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
                 intent.putExtra(TAG_CATEGORY_DATA, Question.CATE_RANDOM);
                 break;
         }
+
+        //show dialog for customizing quiz
         CustomDialogFragment dialog = new CustomDialogFragment();
         dialog.show(getSupportFragmentManager(),"CUSTOM QUIZ FRAGMENT");
     }
+
+    //override dialog onclick listeners here to retrieve data from the dialog
     @Override
     public void onDialogPositiveClick(CustomDialogFragment dialog) {
         speed = dialog.sp_speed.getSelectedItemPosition();
@@ -204,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         return id;
     }
 
+    //setup database and preload data
     private void setDatabase(){
         //set up database
         db = new DatabaseHelper(getApplicationContext());

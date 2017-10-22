@@ -35,6 +35,7 @@ public class PastRecordActivity extends AppCompatActivity {
         records = getAllRecords();
         rv_history.setAdapter(new RecordAdapter(this,records));
 
+        //play bgm
         mp = MediaPlayer.create(PastRecordActivity.this, R.raw.numb);
         mp.setLooping(true);
         mp.setVolume(2.0f, 2.0f);

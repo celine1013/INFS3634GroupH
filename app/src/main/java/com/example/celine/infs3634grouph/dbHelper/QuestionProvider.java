@@ -19,7 +19,8 @@ import java.util.List;
 
 /**
  * Edited by Celine on 12/10/2017.
- * Refer to : lecture slides / lynda video:
+ * Refer to : lecture slides from INFS3634
+ *            lynda video: https://https://www.lynda.com/Android-tutorials/Managing-database-content-provider/377485/406765-4.html?org=unsw.edu.au
  */
 
 public class QuestionProvider extends ContentProvider {

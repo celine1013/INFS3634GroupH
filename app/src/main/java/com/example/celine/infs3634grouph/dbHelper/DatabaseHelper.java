@@ -54,9 +54,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + DatabaseContract.RecordEntry.RECORD_SCORE+ " INTEGER,"
             + DatabaseContract.RecordEntry.RECORD_SPEED + " INTEGER" + ")";
 
-    //Constructor
-
-
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         cr = context.getContentResolver();
@@ -92,6 +89,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /*not yet needed*/
     //update
-
     //delete
 }
