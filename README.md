@@ -26,7 +26,8 @@
   ## Assumption
     1. For categorized quiz, the number of questions is limited to 5 (for revision usage);
     2. For quick start mode, the number of questions is unlimited (for quizing usage);
-    3. All the questions displayed in quizzes are randomised picked
+    3. All the questions displayed in quizzes are randomised picked;
+    4. It is assumed that the need of deleting records manually does not exist;
     
   ## Future extension
     1. multi-player
